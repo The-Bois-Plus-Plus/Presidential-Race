@@ -27,7 +27,7 @@ class Player(pygame.sprite.Sprite):
     # What direction is the player facing?
     direction = "R"
 
-    # List of sprites we can bump against
+    # constructor for player level
     level = None
 
     # -- Methods
