@@ -7,7 +7,8 @@ import pygame
 import constants
 
 from platforms import MovingPlatform
-from spritesheet_functions import SpriteSheet
+from spritesheet import SpriteSheet
+
 
 class Player(pygame.sprite.Sprite):
     """ This class represents the bar at the bottom that the player

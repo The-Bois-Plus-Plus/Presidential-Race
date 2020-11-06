@@ -3,7 +3,7 @@ Module for managing platforms.
 """
 import pygame
 
-from spritesheet_functions import SpriteSheet
+from spritesheet import SpriteSheet
 
 # These constants define our platform types:
 #   Name of file

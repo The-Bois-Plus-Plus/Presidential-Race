@@ -6,7 +6,7 @@ import pygame, random
 
 import constants
 from platforms import MovingPlatform
-from spritesheet_functions import SpriteSheet
+from spritesheet import SpriteSheet
 
 class Enemy(pygame.sprite.Sprite):
     

@@ -1,7 +1,7 @@
 import pygame, random
 
 from platforms import MovingPlatform
-from spritesheet_functions import SpriteSheet
+from spritesheet import SpriteSheet
 import constants
 
 class PowerUp(pygame.sprite.Sprite):

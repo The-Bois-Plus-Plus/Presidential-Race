@@ -48,10 +48,9 @@ def main():
     pygame.init()
 
     # Set the height and width of the screen
-    size = [constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT]
-    screen = pygame.display.set_mode(size)
+    screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 
-    pygame.display.set_caption("Platformer with sprite sheets")
+    pygame.display.set_caption("Team Project")
 
     # Create the player
     player = Player()
@@ -67,15 +66,21 @@ def main():
     current_level_no = 0
     current_level = level_list[current_level_no]
 
+    # We add all the sprites in a group the reason for this is so that we can check for
+    # collision between different groups of sprites.
     active_sprite_list = pygame.sprite.Group()
+    # The mob group. The player can interact with the mob group.
     mob_list = pygame.sprite.Group()
+    # The power up group. The player interacts with the powerups because they are in a group.
     powerUp_list = pygame.sprite.Group()
     player.level = current_level
-    #mob.level = current_level
 
+    # When the game starts the user will be placed 340 pixels away from the left screen.
     player.rect.x = 340
+    # After the player will then be shifted upwards
     player.rect.y = constants.SCREEN_HEIGHT - player.rect.height - 200
-    # mob.rect.y = 10
+
+    # we want to add the player to the sprite list groups since this contains all sprites.
     active_sprite_list.add(player)
     #active_sprite_list.add(mob)
     for i in range(10):
@@ -96,7 +101,6 @@ def main():
 
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
-    print(player.life)
 
     # -------- Main Program Loop -----------
     while not done:
@@ -118,6 +122,7 @@ def main():
                 if event.key == pygame.K_RIGHT and player.change_x > 0:
                     player.stop()
 
+        
         # check if the player collides with enemy either in here or in the next code.
         enemy_hit_list = pygame.sprite.spritecollide(player, mob_list, False, pygame.sprite.collide_mask)
         for hello in enemy_hit_list:
@@ -132,9 +137,8 @@ def main():
                 player.kill()
            else:
                 player.health -= 1
-
+                
         # check to see if the player collides with power ups
-        
         powerup_hit = pygame.sprite.spritecollide(player, powerUp_list, False, pygame.sprite.collide_mask)
         for hit in powerup_hit:
             player.health += 20
@@ -143,9 +147,6 @@ def main():
             hit.kill()
         # Update the player.
         active_sprite_list.update()
-
-        # Update items in the level
-        current_level.update()
 
         # If the player gets near the right side, shift the world left (-x)
         if player.rect.x >= 500:
@@ -157,7 +158,6 @@ def main():
             for new_right in powerUp_list:
                 new_right.rect.x += -diff
             
-
         # If the player gets near the left side, shift the world right (+x)
         if player.rect.x <= 120:
             diff = 120 - player.rect.x
@@ -186,7 +186,11 @@ def main():
 
         # Limit to 60 frames per second
         clock.tick(60)
+        
+        # Update items in the level
+        current_level.update()
 
+        # This draws the player health bar.
         draw_healthBar(screen, 5, 5, player.health)
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
