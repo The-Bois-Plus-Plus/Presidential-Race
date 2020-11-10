@@ -76,7 +76,7 @@ def main():
     player.level = current_level
 
     # When the game starts the user will be placed 340 pixels away from the left screen.
-    player.rect.x = 340
+    player.rect.x = 240
     # After the player will then be shifted upwards
     player.rect.y = constants.SCREEN_HEIGHT - player.rect.height - 200
 
@@ -108,11 +108,12 @@ def main():
             if event.type == pygame.QUIT: # If user clicked close
                 done = True # Flag that we are done so we exit this loop
 
+            #if event.type == pygame.KEYDOWN:
+            #    if event.key == pygame.K_LEFT:
+            #        player.go_left()
+            #    if event.key == pygame.K_RIGHT: 
+            player.go_right()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    player.go_left()
-                if event.key == pygame.K_RIGHT: 
-                    player.go_right()
                 if event.key == pygame.K_UP:
                     player.jump()
 
@@ -149,9 +150,9 @@ def main():
         active_sprite_list.update()
 
         # If the player gets near the right side, shift the world left (-x)
-        if player.rect.x >= 500:
-            diff = player.rect.x - 500
-            player.rect.x = 500
+        if player.rect.x >= 240:
+            diff = player.rect.x - 240
+            player.rect.x = 240
             current_level.shift_world(-diff)
             for right in mob_list:
                 right.rect.x += -diff

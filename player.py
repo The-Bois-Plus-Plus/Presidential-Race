@@ -166,7 +166,7 @@ class Player(pygame.sprite.Sprite):
 
     def go_right(self):
         """ Called when the user hits the right arrow. """
-        self.change_x = 6
+        self.change_x = 4
         self.direction = "R"
 
     def stop(self):
