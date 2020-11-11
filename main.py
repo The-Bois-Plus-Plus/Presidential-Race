@@ -128,23 +128,33 @@ def main():
         enemy_hit_list = pygame.sprite.spritecollide(player, mob_list, False, pygame.sprite.collide_mask)
         for hello in enemy_hit_list:
             # This code puts the player on top of the enemy slime
-            player.rect.y += -hello.rect.y // 30
+            # player.rect.y += -hello.rect.y // 30
 
-        #    if player.health <= 0:
-        #        player.life -= 1
-        #        player.health = 100
+            # this code makes the player bounce if they hit a slime
+            # check to see if the player was previously touching the ground
+            if player.rect.y >= constants.SCREEN_HEIGHT - player.rect.height and player.change_y >= 0:
+                player.health -= 10
+                player.jump()   # if they were then deduct health and jump
+            else: # else just jump and kill slime
+                player.jump()
+                hello.kill()
+
+            player.jump()
+
+            if player.health <= 0:
+               player.life -= 1
+               player.health = 100
                
-        #    if player.life <= 0:
-        #         player.kill()
-        #    else:
-        #         player.health -= 1
+            if player.life <= 0:
+                    player.kill()
+
                 
         # check to see if the player collides with power ups
         powerup_hit = pygame.sprite.spritecollide(player, powerUp_list, False, pygame.sprite.collide_mask)
         for hit in powerup_hit:
-            player.health += 20
-            if player.health >= 100:
-                player.health = 100
+            # player.health += 20
+            # if player.health >= 100:
+            #     player.health = 100
             hit.kill()
         # Update the player.
         active_sprite_list.update()
