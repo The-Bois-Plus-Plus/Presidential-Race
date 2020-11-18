@@ -277,20 +277,13 @@ def main():
                 diff = player.rect.y - 400
                 player.rect.y = 400
                 current_level.shift_worldY(-diff)
-
-            if (player.change_y > 400):
-                player.rect.x = 340
-                player.rect.y = 0
-                current_level.world_shiftX = 0
-                current_level.world_shiftY = 20
-                level2()
  
             hit = pygame.sprite.spritecollide(player, current_level.enemy_sprite, False)
             for hits in hit:
                 # if (player.touchingGround == False):
                 #     hits.kill()
-                player.health -= 1
-                #player.jump()
+                # player.health -= 1
+                # #player.jump()
                 if (player.health <= 0): 
                     player.rect.x = 340
                     # After the player will then be shifted upwards
@@ -349,6 +342,7 @@ def main():
         elif index == 1:
            mainMenu()
 
+        active_sprite_list.update()
         active_sprite_list.draw(screen)
 
         # Limit to 60 frames per second
