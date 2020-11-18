@@ -271,7 +271,7 @@ def main():
             if player.rect.y <= 0:
                 diff = player.rect.y
                 player.rect.y = 0
-                current_level.shift_worldY(diff)
+                current_level.shift_worldY(-diff)
             
             if player.rect.y >= 400:
                 diff = player.rect.y - 400
