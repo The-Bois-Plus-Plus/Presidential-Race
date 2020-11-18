@@ -19,7 +19,7 @@ GRASS_MIDDLE          = (504, 576, 70, 70)
 STONE_PLATFORM_LEFT   = (432, 720, 70, 40)
 STONE_PLATFORM_MIDDLE = (648, 648, 70, 40)
 STONE_PLATFORM_RIGHT  = (792, 648, 70, 40)
-
+EMPTY_PLATFORM        = (914, 936, 50, 71)
 class Platform(pygame.sprite.Sprite):
     """ Platform the user can jump on """
 
@@ -38,6 +38,14 @@ class Platform(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
 
+class Obstacle(pygame.sprite.Sprite):
+    def __init__(self, x, y, w, h):
+        pygame.sprite.Sprite.__init__(self)
+        self.rect = pygame.Rect(x, y, w, h)
+        self.x = x
+        self.y = y
+        self.rect.x = x
+        self.rect.y = y
 
 class MovingPlatform(Platform):
     """ This is a fancier platform that can actually move. """

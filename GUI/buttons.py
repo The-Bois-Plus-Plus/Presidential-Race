@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+#from settings import *
 
 
 class Button(pygame.sprite.Sprite):
@@ -37,7 +37,7 @@ class Button(pygame.sprite.Sprite):
             if self.text == 'Play':
                 index = 1
             elif self.text == 'Quit':
-                index = 3
+                index = 7
             elif self.text == 'Next':
                 if index > 4:
                     pass

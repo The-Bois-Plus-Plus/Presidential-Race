@@ -1,6 +1,6 @@
 import pygame, random
 
-from platforms import MovingPlatform
+#from platforms import MovingPlatform
 from spritesheet import SpriteSheet
 import constants
 
@@ -39,7 +39,7 @@ class PowerUp(pygame.sprite.Sprite):
         self.rect.y += self.change_y
 
  
-        # Check and see if we hit anything
+        # # Check and see if we hit anything
 
         block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
         for block in block_hit_list:
@@ -53,8 +53,8 @@ class PowerUp(pygame.sprite.Sprite):
             # Stop our vertical movement
             self.change_y = 0
 
-            if isinstance(block, MovingPlatform):
-                self.rect.x += block.change_x
+            # if isinstance(block, MovingPlatform):
+            #     self.rect.x += block.change_x
 
     def calc_grav(self):
         """ Calculate effect of gravity. """

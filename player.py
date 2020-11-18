@@ -36,6 +36,7 @@ class Player(pygame.sprite.Sprite):
 
         # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
+        self.touchingGround = False
 
         sprite_sheet = SpriteSheet("p1_walk.png")
         # Load all the right facing images into a list
@@ -93,7 +94,7 @@ class Player(pygame.sprite.Sprite):
 
         # Move left/right
         self.rect.x += self.change_x
-        pos = self.rect.x + self.level.world_shift
+        pos = self.rect.x + self.level.world_shiftX
         if self.direction == "R":
             frame = (pos // 30) % len(self.walking_frames_r)
             self.image = self.walking_frames_r[frame]
@@ -115,6 +116,8 @@ class Player(pygame.sprite.Sprite):
 
         # Move up/down
         self.rect.y += self.change_y
+        self.touchingGround = False
+
 
         # Check and see if we hit anything
         block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
@@ -128,7 +131,7 @@ class Player(pygame.sprite.Sprite):
 
             # Stop our vertical movement
             self.change_y = 0
-
+            self.touchingGround = True
             if isinstance(block, MovingPlatform):
                 self.rect.x += block.change_x
 
@@ -138,15 +141,17 @@ class Player(pygame.sprite.Sprite):
             self.change_y = 1
         else:
             self.change_y += .35
+            print(self.change_y)
+
 
         # See if we are on the ground.
         if self.rect.y >= constants.SCREEN_HEIGHT - self.rect.height and self.change_y >= 0:
             self.change_y = 0
             self.rect.y = constants.SCREEN_HEIGHT - self.rect.height
+        
 
     def jump(self):
         """ Called when user hits 'jump' button. """
-
         # move down a bit and see if there is a platform below us.
         # Move down 2 pixels because it doesn't work well if we only move down 1
         # when working with a platform moving down.
@@ -166,7 +171,7 @@ class Player(pygame.sprite.Sprite):
 
     def go_right(self):
         """ Called when the user hits the right arrow. """
-        self.change_x = 6
+        self.change_x = 4
         self.direction = "R"
 
     def stop(self):
