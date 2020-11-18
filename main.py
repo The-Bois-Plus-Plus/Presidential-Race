@@ -172,7 +172,14 @@ def gameStore():
     refresh()
 
 
+<<<<<<< HEAD
 x = 0
+=======
+    # When the game starts the user will be placed 340 pixels away from the left screen.
+    player.rect.x = 240
+    # After the player will then be shifted upwards
+    player.rect.y = constants.SCREEN_HEIGHT - player.rect.height - 200
+>>>>>>> 3782eecf3abea7299d806a85d00b287e357acb1f
 
 def level1():
     refresh()
@@ -241,6 +248,7 @@ def main():
             # we want to add the player to the sprite list groups since this contains all sprites.
             active_sprite_list.add(player)
 
+<<<<<<< HEAD
             
             # This draws the player health bar.
             draw_healthBar(screen, 5, 5, player.health)
@@ -250,6 +258,12 @@ def main():
 
         if index == 8:
             level2()
+=======
+            #if event.type == pygame.KEYDOWN:
+            #    if event.key == pygame.K_LEFT:
+            #        player.go_left()
+            #    if event.key == pygame.K_RIGHT: 
+>>>>>>> 3782eecf3abea7299d806a85d00b287e357acb1f
             player.go_right()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
@@ -346,7 +360,78 @@ def main():
         elif index == 1:
            mainMenu()
 
+<<<<<<< HEAD
         active_sprite_list.update()
+=======
+        
+        # check if the player collides with enemy either in here or in the next code.
+        enemy_hit_list = pygame.sprite.spritecollide(player, mob_list, False, pygame.sprite.collide_mask)
+        for hello in enemy_hit_list:
+            # This code puts the player on top of the enemy slime
+            # player.rect.y += -hello.rect.y // 30
+
+            # this code makes the player bounce if they hit a slime
+            # check to see if the player was previously touching the ground
+            if player.rect.y >= constants.SCREEN_HEIGHT - player.rect.height and player.change_y >= 0:
+                player.health -= 10
+                player.jump()   # if they were then deduct health and jump
+            else: # else just jump and kill slime
+                player.jump()
+                hello.kill()
+
+            player.jump()
+
+            if player.health <= 0:
+               player.life -= 1
+               player.health = 100
+               
+            if player.life <= 0:
+                    player.kill()
+
+                
+        # check to see if the player collides with power ups
+        powerup_hit = pygame.sprite.spritecollide(player, powerUp_list, False, pygame.sprite.collide_mask)
+        for hit in powerup_hit:
+            # player.health += 20
+            # if player.health >= 100:
+            #     player.health = 100
+            hit.kill()
+        # Update the player.
+        active_sprite_list.update()
+
+        # If the player gets near the right side, shift the world left (-x)
+        if player.rect.x >= 240:
+            diff = player.rect.x - 240
+            player.rect.x = 240
+            current_level.shift_world(-diff)
+            for right in mob_list:
+                right.rect.x += -diff
+            for new_right in powerUp_list:
+                new_right.rect.x += -diff
+            
+        # If the player gets near the left side, shift the world right (+x)
+        if player.rect.x <= 120:
+            diff = 120 - player.rect.x
+            player.rect.x = 120
+            current_level.shift_world(diff)
+            for left in mob_list:
+                left.rect.x += diff
+            for new_left in powerUp_list:
+                new_left.rect.x += diff
+
+
+        # If the player gets to the end of the level, go to the next level
+        current_position = player.rect.x + current_level.world_shift
+        if current_position < current_level.level_limit:
+            player.rect.x = 120
+            if current_level_no < len(level_list)-1:
+                current_level_no += 1
+                current_level = level_list[current_level_no]
+                player.level = current_level
+      
+        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
+        current_level.draw(screen)
+>>>>>>> 3782eecf3abea7299d806a85d00b287e357acb1f
         active_sprite_list.draw(screen)
 
         # Limit to 60 frames per second
