@@ -176,6 +176,8 @@ def gameStore():
 player.rect.x = 240
 # After the player will then be shifted upwards
 player.rect.y = SCREEN_HEIGHT - player.rect.height - 200
+current_level.world_shiftY = player.rect.y - 310
+current_level.world_shiftX = 0
 
 def level1():
     refresh()
@@ -289,7 +291,8 @@ def main():
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
                     # player.rect.y = 200
-                    # current_level.shift_worldY(0)
+                    current_level.shift_worldX(90 - current_level.world_shiftX)
+                    current_level.shift_worldY(90 - current_level.world_shiftY)
                     # current_level.shift_worldY(0)
                     player.health = 100
                     player.life -= 1

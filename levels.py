@@ -104,9 +104,6 @@ class Level_01(Level):
         restart = []
         enemies = []
         for tile_object in constants.myMap.tmxdata.objects:
-            if tile_object.name == 'player':
-                self.player.rect.x = tile_object.x
-                self.player.rect.y = tile_object.y
             if tile_object.name == 'ground':
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y, tile_object.width])
             if tile_object.name == 'water':
