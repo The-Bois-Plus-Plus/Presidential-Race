@@ -126,8 +126,8 @@ class Player(pygame.sprite.Sprite):
             # Reset our position based on the top/bottom of the object.
             if self.change_y > 0:
                 self.rect.bottom = block.rect.top
-            elif self.change_y < 0:
-                self.rect.top = block.rect.bottom
+            # elif self.change_y < 0:
+            #     self.rect.top = block.rect.bottom
 
             # Stop our vertical movement
             self.change_y = 0

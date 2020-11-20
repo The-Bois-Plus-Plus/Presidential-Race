@@ -175,9 +175,7 @@ def gameStore():
 #When the game starts the user will be placed 340 pixels away from the left screen.
 player.rect.x = 240
 # After the player will then be shifted upwards
-player.rect.y = SCREEN_HEIGHT - player.rect.height - 200
-current_level.world_shiftY = player.rect.y - 310
-current_level.world_shiftX = 0
+player.rect.y = SCREEN_HEIGHT - player.rect.height - 140
 
 def level1():
     refresh()
@@ -260,11 +258,11 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     player.jump()
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT and player.change_x < 0:
-                    player.stop()
-                if event.key == pygame.K_RIGHT and player.change_x > 0:
-                    player.stop()
+            # if event.type == pygame.KEYUP:
+            #     if event.key == pygame.K_LEFT and player.change_x < 0:
+            #         player.stop()
+            #     if event.key == pygame.K_RIGHT and player.change_x > 0:
+            #         player.stop()
             # If the player gets near the right side, shift the world left (-x)
             if player.rect.x >= 240:
                 diff = player.rect.x - 240
@@ -274,12 +272,13 @@ def main():
             if player.rect.y <= 0:
                 diff = player.rect.y
                 player.rect.y = 0
-                current_level.shift_worldY(diff)
+                current_level.shift_worldY(-diff)
             
             if player.rect.y >= 400:
                 diff = player.rect.y - 400
                 player.rect.y = 400
                 current_level.shift_worldY(-diff)
+            
  
             hit = pygame.sprite.spritecollide(player, current_level.enemy_sprite, False)
             for hits in hit:
@@ -291,8 +290,8 @@ def main():
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
                     # player.rect.y = 200
-                    current_level.shift_worldX(90 - current_level.world_shiftX)
-                    current_level.shift_worldY(90 - current_level.world_shiftY)
+                    current_level.shift_worldX(-current_level.world_shiftX)
+                    current_level.shift_worldY(40 - current_level.world_shiftY)
                     # current_level.shift_worldY(0)
                     player.health = 100
                     player.life -= 1

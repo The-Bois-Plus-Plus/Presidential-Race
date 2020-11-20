@@ -41,6 +41,7 @@ class Platform(pygame.sprite.Sprite):
 class Obstacle(pygame.sprite.Sprite):
     def __init__(self, x, y, w, h):
         pygame.sprite.Sprite.__init__(self)
+        # self.image = 
         self.rect = pygame.Rect(x, y, w, h)
         self.x = x
         self.y = y
