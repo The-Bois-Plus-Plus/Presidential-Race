@@ -184,6 +184,7 @@ def level2():
     screen.fill((0,0,0))
 
     player.level = current_level
+
     current_level.draw(screen)
     # # This draws the player health bar.
     active_sprite_list.add(player)
@@ -271,7 +272,7 @@ def main():
             if player.rect.y <= 0:
                 diff = player.rect.y
                 player.rect.y = 0
-                current_level.shift_worldY(-diff)
+                current_level.shift_worldY(diff)
             
             if player.rect.y >= 400:
                 diff = player.rect.y - 400
@@ -282,13 +283,14 @@ def main():
             for hits in hit:
                 # if (player.touchingGround == False):
                 #     hits.kill()
-                # player.health -= 1
+                player.health -= 1
                 # #player.jump()
                 if (player.health <= 0): 
-                    player.rect.x = 340
-                    # After the player will then be shifted upwards
-                    player.rect.y = 200
-                    current_level.shift_worldX(1340)
+                    # player.rect.x = 340
+                    # # After the player will then be shifted upwards
+                    # player.rect.y = 200
+                    # current_level.shift_worldY(0)
+                    # current_level.shift_worldY(0)
                     player.health = 100
                     player.life -= 1
                     if (player.life <= 0):

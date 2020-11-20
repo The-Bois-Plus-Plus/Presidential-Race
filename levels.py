@@ -47,7 +47,7 @@ class Level():
         # to give a feeling of depth.
         screen.fill(constants.BLUE)
         screen.blit(self.background,(self.world_shiftX // 3, self.world_shiftY // 3))
-        screen.blit(constants.map_img, (self.world_shiftX, self.world_shiftY - 400))
+        screen.blit(constants.map_img, (self.world_shiftX, self.world_shiftY))
 
         # Draw all the sprite lists that we have
         self.platform_list.draw(screen)
@@ -104,14 +104,17 @@ class Level_01(Level):
         restart = []
         enemies = []
         for tile_object in constants.myMap.tmxdata.objects:
+            if tile_object.name == 'player':
+                self.player.rect.x = tile_object.x
+                self.player.rect.y = tile_object.y
             if tile_object.name == 'ground':
-                ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
+                ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y, tile_object.width])
             if tile_object.name == 'water':
                 pygame.draw.rect(surf, constants.RED, (tile_object.x, tile_object.y - 400, tile_object.width, tile_object.height))
             if tile_object.name == 'restart':
                 restart.append([platforms.GRASS_DIRT, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
-                enemies.append(Enemy(tile_object.x, tile_object.y - 400))
+                enemies.append(Enemy(tile_object.x, tile_object.y))
     
         for active in enemies:
             self.enemy_sprite.add(active)

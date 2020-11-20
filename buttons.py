@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 from constants import BLUE
-from PIL import Image, ImageEnhance
+# from PIL import Image, ImageEnhance
 
 class Button(pygame.sprite.Sprite):
     def __init__(self, image, width, height, x, y, text ='', stack=None):

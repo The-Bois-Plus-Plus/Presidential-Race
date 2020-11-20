@@ -71,7 +71,7 @@
  </layer>
  <objectgroup id="4" name="Obstacle">
   <object id="1" name="ground" x="936" y="865.333" width="645.333" height="68"/>
-  <object id="4" name="player" x="622" y="816" width="28" height="30"/>
+  <object id="4" name="player" x="234.121" y="279.636" width="28" height="30"/>
   <object id="5" name="ground" x="146" y="864" width="500" height="68"/>
   <object id="6" name="ground" x="1588" y="838" width="208" height="22"/>
   <object id="11" name="ground" x="2878.67" y="430.667" width="720" height="73.3333"/>
