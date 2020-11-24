@@ -6,6 +6,7 @@ import pygame
 
 import constants
 
+import platforms
 from platforms import MovingPlatform
 from spritesheet import SpriteSheet
 

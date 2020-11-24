@@ -197,6 +197,8 @@ def level3():
 def main():
     """ Main Program """
     global screen
+    pause = False
+
 
     # Create the player
     #player = Player()
@@ -258,6 +260,7 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     player.jump()
+
             # if event.type == pygame.KEYUP:
             #     if event.key == pygame.K_LEFT and player.change_x < 0:
             #         player.stop()
@@ -284,6 +287,7 @@ def main():
             for hits in hit:
                 # if (player.touchingGround == False):
                 #     hits.kill()
+                hits.jump()
                 player.health -= 1
                 # #player.jump()
                 if (player.health <= 0): 
@@ -345,6 +349,7 @@ def main():
             active_sprite_list.add(btn7)
         elif index == 1:
            mainMenu()
+        
 
         active_sprite_list.update()
         active_sprite_list.draw(screen)

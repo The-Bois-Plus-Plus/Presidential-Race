@@ -2,6 +2,7 @@ import pygame
 
 import constants
 import platforms
+import random
 from enemy import Enemy
 
 class Level():
@@ -111,11 +112,13 @@ class Level_01(Level):
             # if tile_object.name == 'restart':
                 # restart.append(platforms.Obstacle(tile_object.x, tile_object.y, tile_object.width, tile_object.height))
             if tile_object.name == 'enemy':
-                enemies.append(Enemy(tile_object.x, tile_object.y - 400))
-    
+                enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
+
         for active in enemies:
             self.enemy_sprite.add(active)
-
+            #active.jump()
+            #random.choice(enemies)
+        
         for over in restart:
             self.newStart.add(over)
 
