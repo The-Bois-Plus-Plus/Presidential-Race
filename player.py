@@ -41,17 +41,17 @@ class Player(pygame.sprite.Sprite):
 
         sprite_sheet = SpriteSheet("graphicsLib/Player/trump_run.png")
         # Load all the right facing images into a list
-        image = sprite_sheet.get_image(0, 0, 256, 196)
+        image = sprite_sheet.get_image(75, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(256, 0, 256, 196)
+        image = sprite_sheet.get_image(331, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(512, 0, 256, 196)
+        image = sprite_sheet.get_image(587, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(768, 0, 256, 196)
+        image = sprite_sheet.get_image(843, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(1024, 0, 256, 196)
+        image = sprite_sheet.get_image(1099, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(1280, 0, 256, 196)
+        image = sprite_sheet.get_image(1355, 0, 170, 196)
         self.walking_frames_r.append(image)
 
         # Load all the right facing images, then flip them
