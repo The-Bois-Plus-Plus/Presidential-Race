@@ -1,0 +1,60 @@
+{"frames": {
+
+    "Symbol 2 instance 10000":
+    {
+        "frame": {"x":0,"y":0,"w":256,"h":256},
+        "rotated": false,
+        "trimmed": true,
+        "spriteSourceSize": {"x":0,"y":3,"w":73,"h":97},
+        "sourceSize": {"w":256,"h":256}
+    },
+    "Symbol 2 instance 10002":
+    {
+        "frame": {"x":0,"y":0,"w":256,"h":256},
+        "rotated": false,
+        "trimmed": true,
+        "spriteSourceSize": {"x":0,"y":3,"w":73,"h":97},
+        "sourceSize": {"w":256,"h":256}
+    },
+    "Symbol 2 instance 10003":
+    {
+        "frame": {"x":0,"y":0,"w":256,"h":256},
+        "rotated": false,
+        "trimmed": true,
+        "spriteSourceSize": {"x":0,"y":3,"w":73,"h":97},
+        "sourceSize": {"w":256,"h":256}
+    },
+    "Symbol 2 instance 10004":
+    {
+        "frame": {"x":0,"y":0,"w":256,"h":256},
+        "rotated": false,
+        "trimmed": true,
+        "spriteSourceSize": {"x":0,"y":3,"w":73,"h":97},
+        "sourceSize": {"w":256,"h":256}
+    },
+    "Symbol 2 instance 10005":
+    {
+        "frame": {"x":0,"y":0,"w":256,"h":256},
+        "rotated": false,
+        "trimmed": true,
+        "spriteSourceSize": {"x":0,"y":3,"w":73,"h":97},
+        "sourceSize": {"w":256,"h":256}
+    },
+    "Symbol 2 instance 10006":
+    {
+        "frame": {"x":0,"y":0,"w":256,"h":256},
+        "rotated": false,
+        "trimmed": true,
+        "spriteSourceSize": {"x":0,"y":3,"w":73,"h":97},
+        "sourceSize": {"w":256,"h":256}
+    }},
+    "meta": {
+        "app": "Adobe Flash CS6",
+        "version": "12.0.2.529",
+        "image": "p1_walk.png",
+        "format": "RGBA8888",
+        "size": {"w":256,"h":512},
+        "scale": "1"
+    }
+    }
+    
