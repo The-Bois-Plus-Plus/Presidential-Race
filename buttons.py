@@ -55,7 +55,7 @@ class Button(pygame.sprite.Sprite):
             elif self.text == 'Help':
                 index = 4
             elif self.text == 'Back/Arrow' or self.text == 'Back':
-                if index >= 3 and index != 5:
+                if index >= 10 and index != 5 or index == 7:
                     index = 1
                 else:
                     index -= 1
@@ -103,4 +103,7 @@ class Panel(pygame.sprite.Sprite):
                 index = 9
             else:
                 index = 0
+            # if self.text == 'Item1':
+            #     index = 20
+
         return index

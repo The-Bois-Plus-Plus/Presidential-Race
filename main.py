@@ -101,7 +101,11 @@ current_level = level_list[0]
 levels = []
 for x in range(3):
     levels.append(Panel(level1Icon, 200, 150, 100 + x * 210, 100, 'Level{}'.format(x + 1)))
-        
+
+shop = []
+for x in range(3):
+    shop.append(Panel(level1Icon, 100, 100, 360 + x * 105, 110,'Item{}'.format(x + 1)))
+
 def draw_healthBar(surf, x, y, pct):
     if pct < 0:
         pct = 0
@@ -154,7 +158,7 @@ def levelSelection():
          panels.add(levels[lvl])
         #pygame.draw.rect(screen, (255,0,0), (100 + x * 210, 100, 200, 150))
      # this is the back button. It takes you back
-    buttons.add(btn3)
+    buttons.add(btn3) 
     btn3.rect.x = 315
     btn3.rect.y = 400
     active_sprite_list.add(btn3)
@@ -170,6 +174,11 @@ def gameHelp():
     
 def gameStore():
     refresh()
+    for shape_shop in range(3):
+        active_sprite_list.add(shop[shape_shop])
+        panels.add(shop[shape_shop])
+
+#    enhancements = ['jump', 'run', 'life']
 
 
 #When the game starts the user will be placed 340 pixels away from the left screen.
@@ -222,7 +231,7 @@ def main():
                         listener.hover(event)
                         
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if index == 1 or index == 3 or index == 4 or index == 5 or index == 7: #or index == 8:
+                if index <= 10: #or index == 8:
                     for listener in buttons:
                         value = listener.onClick(event, index)
                         index = value
@@ -250,7 +259,7 @@ def main():
             
             # This draws the player health bar.
             draw_healthBar(screen, 5, 5, player.health)
-            draw_lives(screen, 90, 5, player.lives, heartImg)
+            draw_lives(screen, 90, 5, player.life, heartImg)
             # Go ahead and update the screen with what we've drawn.
                # Update items in the level
 
@@ -336,9 +345,13 @@ def main():
             btn3.rect.y = 430
             btn5.rect.y = 20
         if index == 10:
-            refresh()
+            gameStore()
             screen.blit(storeImg, (0,0))
             screen.blit(playerImg, (75, 175))
+
+            btn3.rect.x = 670
+            buttons.add(btn3)
+            active_sprite_list.add(btn3)
         if index == 5:
             # add the next button in here.
             for oldmembers in active_sprite_list:
