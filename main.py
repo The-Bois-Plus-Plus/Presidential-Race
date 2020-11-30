@@ -56,11 +56,16 @@ level1Icon = pygame.image.load("screen.png").convert()
 storeLink = pygame.image.load(path.join(img_dir, "storebtnOrange.png")).convert()
 heartImg  = pygame.image.load(path.join(img_dir, "hearts.png")).convert()
 storeImg  = pygame.image.load("store.png").convert()
+vendetta  = pygame.image.load("vendetta.png").convert()
+speedBoost = pygame.image.load("speedBoost.png").convert()
+health    = pygame.image.load("health.png").convert()
 playerImg = pygame.image.load(path.join(img_dir, "p1_walk02.png")).convert()
 playerImg.set_colorkey(BLACK)
 playerImg = pygame.transform.scale(playerImg, (160,190))
 heartImg.set_colorkey(WHITE)
 
+
+storeImages = [vendetta, speedBoost, health]
 # enhancer = ImageEnhance.Brightness(newImg)
 # im_output = enhancer.enhance(0.5)
 # im_output.save('brighter-img.png')
@@ -104,7 +109,7 @@ for x in range(3):
 
 shop = []
 for x in range(3):
-    shop.append(Panel(level1Icon, 100, 100, 360 + x * 105, 110,'Item{}'.format(x + 1)))
+    shop.append(Panel(storeImages[x], 100, 100, 360 + x * 105, 110,'Item{}'.format(x + 1)))
 
 def draw_healthBar(surf, x, y, pct):
     if pct < 0:
