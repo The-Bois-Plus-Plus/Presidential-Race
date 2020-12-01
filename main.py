@@ -187,7 +187,7 @@ def gameStore():
 
 
 #When the game starts the user will be placed 340 pixels away from the left screen.
-player.rect.x = 240
+player.rect.x = 140
 # After the player will then be shifted upwards
 player.rect.y = SCREEN_HEIGHT - player.rect.height - 140
 
