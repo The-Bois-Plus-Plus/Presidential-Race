@@ -116,9 +116,7 @@ class Level_01(Level):
 
         for active in enemies:
             self.enemy_sprite.add(active)
-            #active.jump()
-            #random.choice(enemies)
-        
+            
         for over in restart:
             self.newStart.add(over)
 
@@ -134,7 +132,7 @@ class Level_01(Level):
 class Level_02(Level):
     def __init__(self, player):
         pass
-    
+
 class Level_03(Level):
     def __init__(self, player):
         pass
