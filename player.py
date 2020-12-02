@@ -6,6 +6,7 @@ import pygame
 
 import constants
 
+import platforms
 from platforms import MovingPlatform
 from spritesheet import SpriteSheet
 
@@ -38,50 +39,44 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.touchingGround = False
 
-        sprite_sheet = SpriteSheet("p1_walk.png")
+        sprite_sheet = SpriteSheet("graphicsLib/Player/trump_run.png")
         # Load all the right facing images into a list
-        image = sprite_sheet.get_image(0, 0, 63, 90)
+        image = sprite_sheet.get_image(75, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(66, 0, 63, 90)
+        image = sprite_sheet.get_image(331, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(132, 0, 67, 90)
+        image = sprite_sheet.get_image(587, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(0, 93, 63, 90)
+        image = sprite_sheet.get_image(843, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(66, 93, 63, 90)
+        image = sprite_sheet.get_image(1099, 0, 170, 196)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(132, 93, 72, 90)
-        self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(0, 186, 70, 90)
+        image = sprite_sheet.get_image(1355, 0, 170, 196)
         self.walking_frames_r.append(image)
 
         # Load all the right facing images, then flip them
         # to face left.
-        image = sprite_sheet.get_image(0, 0, 63, 90)
+        image = sprite_sheet.get_image(0, 256, 256, 256)
         image = pygame.transform.flip(image, True, False)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(66, 0, 63, 90)
+        image = sprite_sheet.get_image(256, 256, 256, 256)
         image = pygame.transform.flip(image, True, False)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(132, 0, 67, 90)
+        image = sprite_sheet.get_image(512, 256, 256, 256)
         image = pygame.transform.flip(image, True, False)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(0, 93, 63, 90)
+        image = sprite_sheet.get_image(768, 256, 256, 256)
         image = pygame.transform.flip(image, True, False)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(66, 93, 63, 90)
+        image = sprite_sheet.get_image(1024, 256, 256, 256)
         image = pygame.transform.flip(image, True, False)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(132, 93, 72, 90)
-        image = pygame.transform.flip(image, True, False)
-        self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(0, 186, 70, 90)
+        image = sprite_sheet.get_image(1280, 256, 256, 256)
         image = pygame.transform.flip(image, True, False)
         self.walking_frames_l.append(image)
 
         # Set the image the player starts with
         self.image = self.walking_frames_r[0]
-
         # Set a referance to the image rect.
         self.rect = self.image.get_rect()
         self.health = 100
@@ -141,7 +136,7 @@ class Player(pygame.sprite.Sprite):
             self.change_y = 1
         else:
             self.change_y += .35
-            print(self.change_y)
+            #print(self.change_y)
 
 
         # See if we are on the ground.

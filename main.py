@@ -41,7 +41,6 @@ from enemy import Enemy
 from voter_mail import PowerUp
 
 pygame.init()
-
 # Set the height and width of the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -57,11 +56,18 @@ level1Icon = pygame.image.load("screen.png").convert()
 storeLink = pygame.image.load(path.join(img_dir, "storebtnOrange.png")).convert()
 heartImg  = pygame.image.load(path.join(img_dir, "hearts.png")).convert()
 storeImg  = pygame.image.load("store.png").convert()
+vendetta  = pygame.image.load("vendetta.png").convert()
+speedBoost = pygame.image.load("speedBoost.png").convert()
+health    = pygame.image.load("health.png").convert()
 playerImg = pygame.image.load(path.join(img_dir, "p1_walk02.png")).convert()
 playerImg.set_colorkey(BLACK)
 playerImg = pygame.transform.scale(playerImg, (160,190))
 heartImg.set_colorkey(WHITE)
+# music_file = 'music\Piano Fantasia Song For Denise.mp3'
+# pygame.mixer.music.load(music_file)
+# pygame.mixer.music.play(-1) 
 
+storeImages = [vendetta, speedBoost, health]
 # enhancer = ImageEnhance.Brightness(newImg)
 # im_output = enhancer.enhance(0.5)
 # im_output.save('brighter-img.png')
@@ -102,7 +108,11 @@ current_level = level_list[0]
 levels = []
 for x in range(3):
     levels.append(Panel(level1Icon, 200, 150, 100 + x * 210, 100, 'Level{}'.format(x + 1)))
-        
+
+shop = []
+for x in range(3):
+    shop.append(Panel(storeImages[x], 100, 100, 360 + x * 105, 110,'Item{}'.format(x + 1)))
+
 def draw_healthBar(surf, x, y, pct):
     if pct < 0:
         pct = 0
@@ -157,7 +167,7 @@ def levelSelection():
          panels.add(levels[lvl])
         #pygame.draw.rect(screen, (255,0,0), (100 + x * 210, 100, 200, 150))
      # this is the back button. It takes you back
-    buttons.add(btn3)
+    buttons.add(btn3) 
     btn3.rect.x = 315
     btn3.rect.y = 400
     active_sprite_list.add(btn3)
@@ -173,17 +183,23 @@ def gameHelp():
     
 def gameStore():
     refresh()
+    for shape_shop in range(3):
+        active_sprite_list.add(shop[shape_shop])
+        panels.add(shop[shape_shop])
+
+#    enhancements = ['jump', 'run', 'life']
 
 
 #When the game starts the user will be placed 340 pixels away from the left screen.
-player.rect.x = 240
+player.rect.x = 140
 # After the player will then be shifted upwards
-player.rect.y = SCREEN_HEIGHT - player.rect.height - 140
+player.rect.y = SCREEN_HEIGHT - player.rect.height - 400
 
 def level1():
     refresh()
 def level2():
     refresh()
+
     screen.fill((0,0,0))
 
     player.level = current_level
@@ -200,6 +216,8 @@ def level3():
 def main():
     """ Main Program """
     global screen
+    pause = False
+
 
     # Create the player
     #player = Player()
@@ -223,7 +241,7 @@ def main():
                         listener.hover(event)
                         
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if index == 1 or index == 3 or index == 4 or index == 5 or index == 7: #or index == 8:
+                if index <= 10: #or index == 8:
                     for listener in buttons:
                         value = listener.onClick(event, index)
                         index = value
@@ -251,7 +269,7 @@ def main():
             
             # This draws the player health bar.
             draw_healthBar(screen, 5, 5, player.health)
-            draw_lives(screen, 90, 5, player.lives, heartImg)
+            draw_lives(screen, 90, 5, player.life, heartImg)
             # Go ahead and update the screen with what we've drawn.
                # Update items in the level
 
@@ -259,8 +277,9 @@ def main():
             level2()
             player.go_right()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
+                if event.key == pygame.K_UP and player.touchingGround:
                     player.jump()
+
             # if event.type == pygame.KEYUP:
             #     if event.key == pygame.K_LEFT and player.change_x < 0:
             #         player.stop()
@@ -277,9 +296,9 @@ def main():
                 player.rect.y = 0
                 current_level.shift_worldY(-diff)
             
-            if player.rect.y >= 400:
-                diff = player.rect.y - 400
-                player.rect.y = 400
+            if player.rect.y >= 50:
+                diff = player.rect.y - 50
+                player.rect.y = 50
                 current_level.shift_worldY(-diff)
             
  
@@ -287,8 +306,9 @@ def main():
             for hits in hit:
                 # if (player.touchingGround == False):
                 #     hits.kill()
+                hits.jump()
                 player.health -= 1
-                # #player.jump()
+                #player.jump()
                 if (player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
@@ -335,9 +355,13 @@ def main():
             btn3.rect.y = 430
             btn5.rect.y = 20
         if index == 10:
-            refresh()
+            gameStore()
             screen.blit(storeImg, (0,0))
             screen.blit(playerImg, (75, 175))
+
+            btn3.rect.x = 670
+            buttons.add(btn3)
+            active_sprite_list.add(btn3)
         if index == 5:
             # add the next button in here.
             for oldmembers in active_sprite_list:
@@ -348,6 +372,7 @@ def main():
             active_sprite_list.add(btn7)
         elif index == 1:
            mainMenu()
+        
 
         active_sprite_list.update()
         active_sprite_list.draw(screen)
