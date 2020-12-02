@@ -1,6 +1,6 @@
 from enemy_ import enemy
 
-class forward(enemy):
+class forward(enemy_):
     def __init__(self, x, y):
         super().__init__(x, y)
         self.timer = 0
@@ -12,7 +12,7 @@ class forward(enemy):
         self.y = y
 
     def movement(self, timer):
-        if self.handle_colisions() == True:
-            self.x += self.change_x
-        self.y = self.calc_gravity
+        super().calc_gravity()
+        self.x += self.change_x
+        self.y = self.calc_gravity()
 
