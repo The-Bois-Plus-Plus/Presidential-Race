@@ -154,8 +154,8 @@ def mainMenu():
     active_sprite_list.add(btn2)
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
-    #mixer.music.load('menu_music.wav')
-    #mixer.music.play(-1)
+    mixer.music.load('music/senorita.mp3')
+    mixer.music.play(-1)
 
 
 # When you clicke the play button this should bring you to all the levels
@@ -307,6 +307,9 @@ def main():
                 # if (player.touchingGround == False):
                 #     hits.kill()
                 hits.jump()
+                #this is the hurt sound effect
+                #pain = mixer.Sound('')
+                #pain.play()
                 player.health -= 1
                 #player.jump()
                 if (player.health <= 0): 
