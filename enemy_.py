@@ -26,7 +26,7 @@ class enemy:
     def update(self):
         self.timer =+ 1
 
-        self.movement(self, self.timer)
+        self.movement(self.timer)
         #Denus did this part
         # See if we hit anything
         block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
@@ -38,6 +38,21 @@ class enemy:
             elif self.change_x < 0:
                 # Otherwise if we are moving left, do the opposite.
                 self.rect.left = block.rect.right
+
+        block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
+        for block in block_hit_list:
+
+            # Reset our position based on the top/bottom of the object.
+            if self.change_y > 0:
+                self.rect.bottom = block.rect.top
+            elif self.change_y < 0:
+                self.rect.top = block.rect.bottom
+
+            # Stop our vertical movement
+            self.change_y = 0
+
+            if isinstance(block, MovingPlatform):
+                self.rect.x += block.change_x
 
     def movement(self, time):
         pass
