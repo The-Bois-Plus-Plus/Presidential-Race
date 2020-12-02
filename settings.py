@@ -16,7 +16,7 @@ WHITE = (255,   255,  255)
 BLACK = (  0,     0,    0)
 GREY  = ( 45,    45,   45)
 
-pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512, devicename=None, allowedchanges=0)
+#pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512, devicename=None, allowedchanges=0)
 #snd_dir = path.join(path.dirname(__file__), 'snd')
 #btn_snd = pygame.mixer.Sound(path.join(snd_dir, 'Hit_Hurt1.wav'))
 
