@@ -28,6 +28,7 @@ import pygame
 import pathlib
 import levels
 from constants import *
+from pygame import mixer
 
 from buttons import Button, Panel
 from platforms import *
@@ -143,6 +144,8 @@ def mainMenu():
     active_sprite_list.add(btn2)
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
+    #mixer.music.load('menu_music.wav')
+    #mixer.music.play(-1)
 
 
 # When you clicke the play button this should bring you to all the levels
