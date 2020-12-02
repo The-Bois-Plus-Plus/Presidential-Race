@@ -40,7 +40,6 @@ from enemy import Enemy
 from voter_mail import PowerUp
 
 pygame.init()
-
 # Set the height and width of the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -63,7 +62,9 @@ playerImg = pygame.image.load(path.join(img_dir, "p1_walk02.png")).convert()
 playerImg.set_colorkey(BLACK)
 playerImg = pygame.transform.scale(playerImg, (160,190))
 heartImg.set_colorkey(WHITE)
-
+# music_file = 'music\Piano Fantasia Song For Denise.mp3'
+# pygame.mixer.music.load(music_file)
+# pygame.mixer.music.play(-1) 
 
 storeImages = [vendetta, speedBoost, health]
 # enhancer = ImageEnhance.Brightness(newImg)
@@ -195,6 +196,7 @@ def level1():
     refresh()
 def level2():
     refresh()
+
     screen.fill((0,0,0))
 
     player.level = current_level

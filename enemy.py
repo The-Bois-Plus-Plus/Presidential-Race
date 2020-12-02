@@ -89,7 +89,7 @@ class Enemy(pygame.sprite.Sprite):
             self.change_y = 1
         else:
             self.change_y += .35
-            print(self.change_y)
+            #print(self.change_y)
 
 
         # See if we are on the ground.
