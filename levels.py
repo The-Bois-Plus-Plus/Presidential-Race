@@ -130,3 +130,11 @@ class Level_01(Level):
             block.rect.w = platform[3]
             block.player = self.player
             self.platform_list.add(block)
+
+class Level_02(Level):
+    def __init__(self, player):
+        pass
+    
+class Level_03(Level):
+    def __init__(self, player):
+        pass

@@ -189,7 +189,7 @@ def gameStore():
 #When the game starts the user will be placed 340 pixels away from the left screen.
 player.rect.x = 140
 # After the player will then be shifted upwards
-player.rect.y = SCREEN_HEIGHT - player.rect.height - 140
+player.rect.y = SCREEN_HEIGHT - player.rect.height - 400
 
 def level1():
     refresh()
@@ -272,7 +272,7 @@ def main():
             level2()
             player.go_right()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
+                if event.key == pygame.K_UP and player.touchingGround:
                     player.jump()
 
             # if event.type == pygame.KEYUP:
@@ -291,9 +291,9 @@ def main():
                 player.rect.y = 0
                 current_level.shift_worldY(-diff)
             
-            if player.rect.y >= 400:
-                diff = player.rect.y - 400
-                player.rect.y = 400
+            if player.rect.y >= 50:
+                diff = player.rect.y - 50
+                player.rect.y = 50
                 current_level.shift_worldY(-diff)
             
  
@@ -303,7 +303,7 @@ def main():
                 #     hits.kill()
                 hits.jump()
                 player.health -= 1
-                # #player.jump()
+                #player.jump()
                 if (player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
