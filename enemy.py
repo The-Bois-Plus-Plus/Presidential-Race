@@ -38,7 +38,7 @@ class Enemy(pygame.sprite.Sprite):
         # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
 
-        sprite_sheet = SpriteSheet("slimeWalk1.png")
+        sprite_sheet = SpriteSheet("images/slimeWalk1.png")
         # Load all the right facing images into a list
         image = sprite_sheet.get_image(0, 0, 49, 28)
         self.walking_frames_r.append(image)
@@ -56,7 +56,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = y  
         pygame.sprite.Sprite.__init__(self)
 
-        sprite_sheet = SpriteSheet("slimeWalk1.png")
+        sprite_sheet = SpriteSheet("images/slimeWalk1.png")
         # Load all the right facing images into a list
         image = sprite_sheet.get_image(0, 0, 49, 28)
         self.walking_frames_r.append(image)
