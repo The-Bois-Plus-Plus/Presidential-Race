@@ -11,7 +11,7 @@ class PowerUp(pygame.sprite.Sprite):
     change_y = 0
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        sprite_sheet = SpriteSheet("voter_mail.png")
+        sprite_sheet = SpriteSheet("images/voter_mail.png")
         image = sprite_sheet.get_image(0, 0, 66, 58)
 
         self.image = image
