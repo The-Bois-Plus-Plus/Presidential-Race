@@ -154,8 +154,8 @@ def mainMenu():
     active_sprite_list.add(btn2)
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
-    mixer.music.load('music/senorita.mp3')
-    mixer.music.play(-1)
+    # mixer.music.load('music/senorita.mp3')
+    # mixer.music.play(-1)
 
 
 # When you clicke the play button this should bring you to all the levels
@@ -308,8 +308,8 @@ def main():
                 #     hits.kill()
                 hits.jump()
                 #this is the hurt sound effect
-                pain = mixer.Sound('chinese-virus.mp3')
-                pain.play()
+                # pain = mixer.Sound('chinese-virus.mp3')
+                # pain.play()
                 player.health -= 1
                 #player.jump()
                 if (player.health <= 0): 
