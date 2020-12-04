@@ -154,8 +154,8 @@ def mainMenu():
     active_sprite_list.add(btn2)
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
-    #mixer.music.load('menu_music.wav')
-    #mixer.music.play(-1)
+    mixer.music.load('music/senorita.mp3')
+    mixer.music.play(-1)
 
 
 # When you clicke the play button this should bring you to all the levels
@@ -279,7 +279,6 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP and player.touchingGround:
                     player.jump()
-
             # if event.type == pygame.KEYUP:
             #     if event.key == pygame.K_LEFT and player.change_x < 0:
             #         player.stop()
@@ -295,18 +294,26 @@ def main():
                 diff = player.rect.y
                 player.rect.y = 0
                 current_level.shift_worldY(-diff)
-            
+                   
+            if player.rect.y > 90:
+                current_level.shift_worldX(-current_level.world_shiftX)
+                current_level.shift_worldY(-current_level.world_shiftY)
+                player.rect.y = 225
+
             if player.rect.y >= 50:
                 diff = player.rect.y - 50
                 player.rect.y = 50
                 current_level.shift_worldY(-diff)
             
- 
             hit = pygame.sprite.spritecollide(player, current_level.enemy_sprite, False)
+            
             for hits in hit:
                 # if (player.touchingGround == False):
                 #     hits.kill()
                 hits.jump()
+                #this is the hurt sound effect
+                #pain = mixer.Sound('')
+                #pain.play()
                 player.health -= 1
                 #player.jump()
                 if (player.health <= 0): 

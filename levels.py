@@ -29,7 +29,7 @@ class Level():
         self.platform_list = pygame.sprite.Group()
         self.enemy_list = pygame.sprite.Group()
         self.enemy_sprite = pygame.sprite.Group()
-        self.newStart = pygame.sprite.Group()
+        self.respawn_list = pygame.sprite.Group()
         self.player = player
 
     # Update everythign on this level
@@ -38,7 +38,7 @@ class Level():
         self.platform_list.update()
         self.enemy_list.update()
         self.enemy_sprite.update()
-        self.newStart.update()
+        self.respawn_list.update()
 
     def draw(self, screen):
         """ Draw everything on this level. """
@@ -54,7 +54,7 @@ class Level():
         self.platform_list.draw(screen)
         self.enemy_list.draw(screen)
         self.enemy_sprite.draw(screen)
-        self.newStart.draw(screen)
+        self.respawn_list.draw(screen)
     
     def shift_worldY(self, shift_y):
         """ When the user mouse up or down and we need to scroll everything: """
@@ -114,11 +114,12 @@ class Level_01(Level):
             if tile_object.name == 'enemy':
                 enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
 
+            if tile_object.name == 'restart':
+                restart.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width, tile_object.height])
+
         for active in enemies:
             self.enemy_sprite.add(active)
-            
-        for over in restart:
-            self.newStart.add(over)
+
 
         # Go through the array above and add platforms
         for platform in ground:
@@ -128,6 +129,13 @@ class Level_01(Level):
             block.rect.w = platform[3]
             block.player = self.player
             self.platform_list.add(block)
+        
+        for respawn in restart:
+            respawn = platforms.Platform(platform[0])
+            respawn.rect.x = platform[1]
+            respawn.rect.y = platform[2]
+            respawn.rect.w = platform[3]
+            self.respawn_list.add(respawn)
 
 class Level_02(Level):
     def __init__(self, player):

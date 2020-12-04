@@ -37,17 +37,7 @@ class Platform(pygame.sprite.Sprite):
                                             sprite_sheet_data[3])
 
         self.rect = self.image.get_rect()
-
-class Obstacle(pygame.sprite.Sprite):
-    def __init__(self, x, y, w, h):
-        pygame.sprite.Sprite.__init__(self)
-        # self.image = 
-        self.rect = pygame.Rect(x, y, w, h)
-        self.x = x
-        self.y = y
-        self.rect.x = x
-        self.rect.y = y
-
+        
 class MovingPlatform(Platform):
     """ This is a fancier platform that can actually move. """
     change_x = 0
