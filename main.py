@@ -308,8 +308,8 @@ def main():
                 #     hits.kill()
                 hits.jump()
                 #this is the hurt sound effect
-                #pain = mixer.Sound('')
-                #pain.play()
+                pain = mixer.Sound('chinese-virus.mp3')
+                pain.play()
                 player.health -= 1
                 #player.jump()
                 if (player.health <= 0): 
