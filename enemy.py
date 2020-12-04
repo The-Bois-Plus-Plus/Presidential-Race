@@ -38,11 +38,11 @@ class Enemy(pygame.sprite.Sprite):
         # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
 
-        sprite_sheet = SpriteSheet("images/slimeWalk1.png")
+        sprite_sheet = SpriteSheet("graphicsLib/Enemies/china_virus.png")
         # Load all the right facing images into a list
-        image = sprite_sheet.get_image(0, 0, 49, 28)
+        image = sprite_sheet.get_image(0, 0, 50, 50)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(0, 0, 59, 12)
+        image = sprite_sheet.get_image(0, 0, 50, 50)
         self.walking_frames_r.append(image)
 
         # Set the image the player starts with
