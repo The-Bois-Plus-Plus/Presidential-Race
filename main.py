@@ -48,17 +48,17 @@ pygame.display.set_caption("Team Project")
 
 img_dir = path.join(path.dirname(__file__), 'img')
 playButton = pygame.image.load(path.join(img_dir, "btn1.png")).convert()
-gameMenu   = pygame.image.load("presidentrunMenu.png")
-helpnav1   = pygame.image.load("help.png")
+gameMenu   = pygame.image.load("images/presidentrunMenu.png")
+helpnav1   = pygame.image.load("images/help.png")
 backButton = pygame.image.load(path.join(img_dir,"btn2.png")).convert()
 backArrow = pygame.image.load(path.join(img_dir, "arrow.png")).convert()
-level1Icon = pygame.image.load("screen.png").convert()
+level1Icon = pygame.image.load("images/screen.png").convert()
 storeLink = pygame.image.load(path.join(img_dir, "storebtnOrange.png")).convert()
 heartImg  = pygame.image.load(path.join(img_dir, "hearts.png")).convert()
-storeImg  = pygame.image.load("store.png").convert()
-vendetta  = pygame.image.load("vendetta.png").convert()
-speedBoost = pygame.image.load("speedBoost.png").convert()
-health    = pygame.image.load("health.png").convert()
+storeImg  = pygame.image.load("images/store.png").convert()
+vendetta  = pygame.image.load("images/vendetta.png").convert()
+speedBoost = pygame.image.load("images/speedBoost.png").convert()
+health    = pygame.image.load("images/health.png").convert()
 playerImg = pygame.image.load(path.join(img_dir, "p1_walk02.png")).convert()
 playerImg.set_colorkey(BLACK)
 playerImg = pygame.transform.scale(playerImg, (160,190))
@@ -70,7 +70,7 @@ heartImg.set_colorkey(WHITE)
 storeImages = [vendetta, speedBoost, health]
 # enhancer = ImageEnhance.Brightness(newImg)
 # im_output = enhancer.enhance(0.5)
-# im_output.save('brighter-img.png')
+# im_output.save('images/brighter-img.png')
 
 # We add all the sprites in a group the reason for this is so that we can check for
 # collision between different groups of sprites.
@@ -246,7 +246,7 @@ def main():
                         value = listener.onClick(event, index)
                         index = value
                         if (index == 8):
-                            pygame.image.save(screen, "screen.png")
+                            pygame.image.save(screen, "images/screen.png")
                 if index == 7:
                     for panel in panels:
                         value = panel.onClick(event, index)
