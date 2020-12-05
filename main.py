@@ -298,7 +298,7 @@ def main():
             if player.rect.y > 90:
                 current_level.shift_worldX(-current_level.world_shiftX)
                 current_level.shift_worldY(-current_level.world_shiftY)
-                player.rect.y = 225
+                player.rect.y = 380
 
             if player.rect.y >= 50:
                 diff = player.rect.y - 50
