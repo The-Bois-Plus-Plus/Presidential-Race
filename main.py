@@ -308,9 +308,9 @@ def main():
             hit = pygame.sprite.spritecollide(player, current_level.enemy_sprite, False)
             
             for hits in hit:
-                # if (player.touchingGround == False):
-                #     hits.kill()
-                hits.jump()
+                if (player.touchingGround == False):
+                    player.jump()
+                # player.jump()
                 #this is the hurt sound effect
                 pain = mixer.Sound('music/bigOuch.wav')
                 pain.play()
