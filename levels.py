@@ -29,7 +29,7 @@ class Level():
         self.platform_list = pygame.sprite.Group()
         self.enemy_list = pygame.sprite.Group()
         self.enemy_sprite = pygame.sprite.Group()
-        self.respawn_list = pygame.sprite.Group()
+        # self.respawn_list = pygame.sprite.Group()
         self.player = player
 
     # Update everythign on this level
@@ -54,7 +54,7 @@ class Level():
         self.platform_list.draw(screen)
         self.enemy_list.draw(screen)
         self.enemy_sprite.draw(screen)
-        self.respawn_list.draw(screen)
+        # self.respawn_list.draw(screen)
     
     def shift_worldY(self, shift_y):
         """ When the user mouse up or down and we need to scroll everything: """
@@ -100,22 +100,13 @@ class Level_01(Level):
         self.background.set_colorkey(constants.WHITE)
         self.level_limit = -2500
         
-
         ground = []
-        restart = []
         enemies = []
         for tile_object in constants.myMap.tmxdata.objects:
             if tile_object.name == 'ground':
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
-            if tile_object.name == 'water':
-                pygame.draw.rect(surf, constants.RED, (tile_object.x, tile_object.y - 400, tile_object.width, tile_object.height))
-            # if tile_object.name == 'restart':
-                # restart.append(platforms.Obstacle(tile_object.x, tile_object.y, tile_object.width, tile_object.height))
             if tile_object.name == 'enemy':
                 enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
-
-            if tile_object.name == 'restart':
-                restart.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width, tile_object.height])
 
         for active in enemies:
             self.enemy_sprite.add(active)
@@ -129,18 +120,53 @@ class Level_01(Level):
             block.rect.w = platform[3]
             block.player = self.player
             self.platform_list.add(block)
-        
-        for respawn in restart:
-            respawn = platforms.Platform(platform[0])
-            respawn.rect.x = platform[1]
-            respawn.rect.y = platform[2]
-            respawn.rect.w = platform[3]
-            self.respawn_list.add(respawn)
 
 class Level_02(Level):
     def __init__(self, player):
-        pass
+        Level.__init__(self, player)
+
+        self.background = pygame.image.load("images/background_01.png").convert()
+        self.background.set_colorkey(constants.WHITE)
+        self.level_limit = -2500
+        ground  = []
+        enemies = []
+        for tile_object in constants.myMap.tmxdata.objects:
+            if tile_object.name == 'ground':
+                ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
+            if tile_object.name == 'enemy':
+                enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
+                
+        for active in enemies:
+            self.enemy_sprite.add(active)
+        for platform in ground:
+            block = platforms.Platform(platform[0])
+            block.rect.x = platform[1]
+            block.rect.y = platform[2]
+            block.rect.w = platform[3]
+            block.player = self.player
+            self.platform_list.add(block)
 
 class Level_03(Level):
     def __init__(self, player):
-        pass
+        Level.__init__(self, player)
+
+        self.background = pygame.image.load("images/background_01.png").convert()
+        self.background.set_colorkey(constants.WHITE)
+        self.level_limit = -2500
+        ground  = []
+        enemies = []
+        for tile_object in constants.myMap.tmxdata.objects:
+            if tile_object.name == 'ground':
+                ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
+            if tile_object.name == 'enemy':
+                enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
+                
+        for active in enemies:
+            self.enemy_sprite.add(active)
+        for platform in ground:
+            block = platforms.Platform(platform[0])
+            block.rect.x = platform[1]
+            block.rect.y = platform[2]
+            block.rect.w = platform[3]
+            block.player = self.player
+            self.platform_list.add(block)

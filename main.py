@@ -91,8 +91,9 @@ walls = pygame.sprite.Group()
 player = Player()
 level_list = []
 level_list.append(levels.Level_01(player, screen))
+level_list.append(levels.Level_02(player))
+level_list.append(levels.Level_03(player))
 
-current_level = level_list[0]
 
 #player.level = current_level
 # Create all the levels
@@ -136,11 +137,33 @@ def refresh():
     for btn in buttons:
         btn.kill()
 
+def cameraMovement():
+    if player.rect.x >= 240:
+        diff = player.rect.x - 240
+        player.rect.x = 240
+        level_list[1].shift_worldX(-diff)
 
-    
-def LevelOverView():
-    refresh()
-    
+    if player.rect.y <= 0:
+        diff = player.rect.y
+        player.rect.y = 0
+        level_list[1].shift_worldY(-diff)
+            
+    if player.rect.y > 90:
+        level_list[1].shift_worldX(-level_list[1].world_shiftX)
+        level_list[1].shift_worldY(-level_list[1].world_shiftY)
+        player.rect.y = 380
+
+    if player.rect.y >= 50:
+        diff = player.rect.y - 50
+        player.rect.y = 50
+        level_list[1].shift_worldY(-diff)
+
+def playerMovement(event):
+    player.go_right()
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_UP and player.touchingGround:
+            player.jump()
+
 def mainMenu():
     refresh()
     #for oldmembers in active_sprite_list:
@@ -154,8 +177,6 @@ def mainMenu():
     active_sprite_list.add(btn2)
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
-    # mixer.music.load('music/senorita.mp3')
-    # mixer.music.play(-1)
 
 
 # When you clicke the play button this should bring you to all the levels
@@ -172,14 +193,14 @@ def levelSelection():
     btn3.rect.y = 400
     active_sprite_list.add(btn3)
     
-def gameOver():
-    refresh()
+# def gameOver():
+#     refresh()
     
-def gameSettings():
-    refresh()
+# def gameSettings():
+#     refresh()
     
-def gameHelp():
-    refresh()
+# def gameHelp():
+#     refresh()
     
 def gameStore():
     refresh()
@@ -189,7 +210,6 @@ def gameStore():
 
 #    enhancements = ['jump', 'run', 'life']
 
-
 #When the game starts the user will be placed 340 pixels away from the left screen.
 player.rect.x = 140
 # After the player will then be shifted upwards
@@ -197,27 +217,44 @@ player.rect.y = SCREEN_HEIGHT - player.rect.height - 400
 
 def level1():
     refresh()
+    screen.fill(BLUE)
+    player.level = level_list[0]
+    level_list[0].draw(screen)
+    active_sprite_list.add(player)
+
+    draw_healthBar(screen, 5, 5, player.health)
+    draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
+    
+    
 def level2():
     refresh()
 
-    screen.fill((0,0,0))
+    screen.fill(BLUE)
 
-    player.level = current_level
+    player.level = level_list[1]
 
-    current_level.draw(screen)
+    level_list[1].draw(screen)
     # # This draws the player health bar.
     active_sprite_list.add(player)
  
     draw_healthBar(screen, 5, 5, player.health)
     draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
+
 def level3():
     refresh()
+    screen.fill(BLUE)
+
+    player.level = level_list[2]
+
+    level_list[2].draw(screen)
+    active_sprite_list.add(player)
+ 
+    draw_healthBar(screen, 5, 5, player.health)
+    draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
 
 def main():
     """ Main Program """
     global screen
-    pause = False
-
 
     # Create the player
     #player = Player()
@@ -253,59 +290,14 @@ def main():
                         index = value
         if index == 6:
             level1()
-            # The mob group. The player can interact with the mob group.
-            mob_list = pygame.sprite.Group()
-            # The power up group. The player interacts with the powerups because they are in a group.
-            powerUp_list = pygame.sprite.Group()
-
-            # When the game starts the user will be placed 340 pixels away from the left screen.
-            player.rect.x = 340
-            # After the player will then be shifted upwards
-            player.rect.y = 200
-
-            # we want to add the player to the sprite list groups since this contains all sprites.
-            active_sprite_list.add(player)
-
-            
-            # This draws the player health bar.
-            draw_healthBar(screen, 5, 5, player.health)
-            draw_lives(screen, 90, 5, player.life, heartImg)
-            # Go ahead and update the screen with what we've drawn.
-               # Update items in the level
+            playerMovement(event)
+            cameraMovement()
 
         if index == 8:
             level2()
-            player.go_right()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP and player.touchingGround:
-                    player.jump()
-            # if event.type == pygame.KEYUP:
-            #     if event.key == pygame.K_LEFT and player.change_x < 0:
-            #         player.stop()
-            #     if event.key == pygame.K_RIGHT and player.change_x > 0:
-            #         player.stop()
-            # If the player gets near the right side, shift the world left (-x)
-            if player.rect.x >= 240:
-                diff = player.rect.x - 240
-                player.rect.x = 240
-                current_level.shift_worldX(-diff)
-            
-            if player.rect.y <= 0:
-                diff = player.rect.y
-                player.rect.y = 0
-                current_level.shift_worldY(-diff)
-                   
-            if player.rect.y > 90:
-                current_level.shift_worldX(-current_level.world_shiftX)
-                current_level.shift_worldY(-current_level.world_shiftY)
-                player.rect.y = 380
-
-            if player.rect.y >= 50:
-                diff = player.rect.y - 50
-                player.rect.y = 50
-                current_level.shift_worldY(-diff)
-            
-            hit = pygame.sprite.spritecollide(player, current_level.enemy_sprite, False)
+            playerMovement(event)
+            cameraMovement()
+            hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
             
             for hits in hit:
                 if (player.touchingGround == False):
@@ -321,8 +313,8 @@ def main():
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
                     # player.rect.y = 200
-                    current_level.shift_worldX(-current_level.world_shiftX)
-                    current_level.shift_worldY(40 - current_level.world_shiftY)
+                    level_list[1].shift_worldX(-level_list[1].world_shiftX)
+                    level_list[1].shift_worldY(40 -level_list[1].world_shiftY)
                     # current_level.shift_worldY(0)
                     player.health = 100
                     player.life -= 1
@@ -335,7 +327,8 @@ def main():
                         level2()
         if index == 9:
             level3()
-            screen.fill((0,0,0))
+            playerMovement(event)
+            cameraMovement()
         if index == 7:
             refresh()
             screen.fill((0,0,0))
