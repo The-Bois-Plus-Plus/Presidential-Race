@@ -310,11 +310,12 @@ def main():
             for hits in hit:
                 if (player.touchingGround == False):
                     player.jump()
-                # player.jump()
+                else:
+                    player.health -= 1
                 #this is the hurt sound effect
                 pain = mixer.Sound('music/bigOuch.wav')
                 pain.play()
-                player.health -= 1
+
                 #player.jump()
                 if (player.health <= 0): 
                     # player.rect.x = 340
