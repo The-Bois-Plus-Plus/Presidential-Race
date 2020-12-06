@@ -90,7 +90,7 @@ class Level():
 class Level_01(Level):
     """ Definition for level 1. """
 
-    def __init__(self, player, surf):
+    def __init__(self, player):
         """ Create level 1. """
 
         # Call the parent constructor
@@ -128,16 +128,20 @@ class Level_02(Level):
         self.background = pygame.image.load("images/background_01.png").convert()
         self.background.set_colorkey(constants.WHITE)
         self.level_limit = -2500
-        ground  = []
+        
+        ground = []
         enemies = []
         for tile_object in constants.myMap.tmxdata.objects:
             if tile_object.name == 'ground':
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
                 enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
-                
+
         for active in enemies:
             self.enemy_sprite.add(active)
+
+
+        # Go through the array above and add platforms
         for platform in ground:
             block = platforms.Platform(platform[0])
             block.rect.x = platform[1]
@@ -153,16 +157,20 @@ class Level_03(Level):
         self.background = pygame.image.load("images/background_01.png").convert()
         self.background.set_colorkey(constants.WHITE)
         self.level_limit = -2500
-        ground  = []
+        
+        ground = []
         enemies = []
         for tile_object in constants.myMap.tmxdata.objects:
             if tile_object.name == 'ground':
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
                 enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
-                
+
         for active in enemies:
             self.enemy_sprite.add(active)
+
+
+        # Go through the array above and add platforms
         for platform in ground:
             block = platforms.Platform(platform[0])
             block.rect.x = platform[1]

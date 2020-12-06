@@ -90,21 +90,9 @@ walls = pygame.sprite.Group()
 
 player = Player()
 level_list = []
-level_list.append(levels.Level_01(player, screen))
 level_list.append(levels.Level_02(player))
-level_list.append(levels.Level_03(player))
-
-
-#player.level = current_level
-# Create all the levels
-#level_list = []
-#level_list.append(levels.Level_02(player))
-#level_list.append(levels.Level_03(player))
-
-# Set the current level
-#current_level = level_list[1]
-
-
+level_list.append(levels.Level_02(player))
+level_list.append(levels.Level_02(player))
 # create the game selection
 levels = []
 for x in range(3):
@@ -137,26 +125,26 @@ def refresh():
     for btn in buttons:
         btn.kill()
 
-def cameraMovement():
+def cameraMovement(current_level):
     if player.rect.x >= 240:
         diff = player.rect.x - 240
         player.rect.x = 240
-        level_list[1].shift_worldX(-diff)
+        current_level.shift_worldX(-diff)
 
     if player.rect.y <= 0:
         diff = player.rect.y
         player.rect.y = 0
-        level_list[1].shift_worldY(-diff)
+        current_level.shift_worldY(-diff)
             
     if player.rect.y > 90:
-        level_list[1].shift_worldX(-level_list[1].world_shiftX)
-        level_list[1].shift_worldY(-level_list[1].world_shiftY)
+        current_level.shift_worldX(-current_level.world_shiftX)
+        current_level.shift_worldY(-current_level.world_shiftY)
         player.rect.y = 380
 
     if player.rect.y >= 50:
         diff = player.rect.y - 50
         player.rect.y = 50
-        level_list[1].shift_worldY(-diff)
+        current_level.shift_worldY(-diff)
 
 def playerMovement(event):
     player.go_right()
@@ -291,12 +279,12 @@ def main():
         if index == 6:
             level1()
             playerMovement(event)
-            cameraMovement()
+            cameraMovement(level_list[0])
 
         if index == 8:
             level2()
             playerMovement(event)
-            cameraMovement()
+            cameraMovement(level_list[1])
             hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
             
             for hits in hit:
@@ -328,7 +316,7 @@ def main():
         if index == 9:
             level3()
             playerMovement(event)
-            cameraMovement()
+            cameraMovement(level_list[2])
         if index == 7:
             refresh()
             screen.fill((0,0,0))
