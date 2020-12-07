@@ -183,7 +183,7 @@ class Level_01(Level):
         del self.power[:]
         for votes in self.vote_list:
             votes.kill()
-        print(self.power)
+
         for tile_object in constants.myMap.tmxdata.objects:
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
@@ -255,7 +255,7 @@ class Level_02(Level):
         del self.power[:]
         for votes in self.vote_list:
             votes.kill()
-        print(self.power)
+
         for tile_object in constants.myMap.tmxdata.objects:
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
@@ -328,7 +328,7 @@ class Level_03(Level):
         del self.power[:]
         for votes in self.vote_list:
             votes.kill()
-        print(self.power)
+
         for tile_object in constants.myMap.tmxdata.objects:
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
