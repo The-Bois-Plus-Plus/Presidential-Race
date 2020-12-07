@@ -255,10 +255,6 @@ def level2():
     draw_healthBar(screen, 5, 5, player.health)
     draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
     
-<<<<<<< HEAD
-
-=======
->>>>>>> ebc66fce166a93075f48d6465926f74dcd49a912
 def level3():
     refresh()
     screen.fill(BLUE)
@@ -354,13 +350,6 @@ def main():
             hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
 
             for hits in hit:
-<<<<<<< HEAD
-                # if (player.touchingGround == False):
-                #     player.jump()
-                # else:
-                #     player.health -= 1
-                player.health -= 1
-=======
                 if (player.touchingGround == False):
                     player.jump()
                 else:
@@ -376,7 +365,6 @@ def main():
 
                 player.health -= 1
                 #player.jump()
->>>>>>> ebc66fce166a93075f48d6465926f74dcd49a912
                 if (player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
