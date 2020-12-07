@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="54">
  <tileset firstgid="1" source="tiles_spritesheetDenis.tsx"/>
- <layer id="1" name="Grass" width="50" height="30" offsetx="0" offsety="324.242">
+ <layer id="1" name="Grass" width="50" height="30" offsetx="0" offsety="324">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -69,10 +69,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="4" name="Obstacle" offsetx="-9.09091" offsety="330.303">
+ <objectgroup id="4" name="Obstacle" offsetx="-9" offsety="330">
   <object id="31" name="ground" x="76" y="715" width="500" height="43"/>
-  <object id="32" name="ground" x="1079.27" y="935.543" width="293.879" height="651.333"/>
-  <object id="33" name="ground" x="2594.79" y="1081.03" width="428" height="31"/>
+  <object id="32" name="ground" x="1079" y="935" width="293" height="651"/>
+  <object id="33" name="ground" x="2594" y="1081" width="428" height="31"/>
   <object id="34" name="ground" x="1514.66" y="939.48" width="504" height="27.3333"/>
   <object id="35" name="ground" x="2304.79" y="864.637" width="428" height="36.6667"/>
   <object id="36" name="ground" x="3097.52" y="1296.03" width="428" height="304.667"/>
