@@ -63,6 +63,8 @@ playerImg = pygame.image.load(path.join(img_dir, "p1_walk02.png")).convert()
 playerImg.set_colorkey(BLACK)
 playerImg = pygame.transform.scale(playerImg, (160,190))
 heartImg.set_colorkey(WHITE)
+# mixer.music.load('music/senorita.mp3')
+# mixer.music.play(-1)
 # music_file = 'music\Piano Fantasia Song For Denise.mp3'
 # pygame.mixer.music.load(music_file)
 # pygame.mixer.music.play(-1) 
@@ -301,15 +303,21 @@ def main():
                 player.rect.y = 50
                 current_level.shift_worldY(-diff)
             
- 
+            
             hit = pygame.sprite.spritecollide(player, current_level.enemy_sprite, False)
             for hits in hit:
                 # if (player.touchingGround == False):
                 #     hits.kill()
                 hits.jump()
                 #this is the hurt sound effect
+                #if pygame.mixer.get_busy() == False:
                 pain = mixer.Sound('music/bigOuch.wav')
                 pain.play()
+                #if player.change_y < 0 and player.y > current_level.enemy_sprite.y:
+                    #player.jump()
+                #else:
+                    #player.health -= 1
+
                 player.health -= 1
                 #player.jump()
                 if (player.health <= 0): 
