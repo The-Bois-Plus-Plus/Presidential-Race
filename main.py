@@ -24,20 +24,20 @@ http://opengameart.org/content/platformer-art-deluxe
 
 """
 
-import pygame
 import pathlib
-import levels
-from constants import *
+from os import path
+
+import pygame
 from pygame import mixer
 
+import levels
 from buttons import Button, Panel
-from platforms import *
-from img import *
-from os import path
-from tilemap import TileMap
-
-from player import Player
+from constants import *
 from enemy import Enemy
+from img import *
+from platforms import *
+from player import Player
+from tilemap import TileMap
 from voter_mail import PowerUp
 
 pygame.init()
@@ -239,7 +239,7 @@ def level2():
  
     draw_healthBar(screen, 5, 5, player.health)
     draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
-
+    
 def level3():
     refresh()
     screen.fill(BLUE)
@@ -298,7 +298,7 @@ def main():
             playerMovement(event)
             cameraMovement()
             hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
-            
+
             for hits in hit:
                 if (player.touchingGround == False):
                     player.jump()
