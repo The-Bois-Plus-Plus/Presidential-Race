@@ -63,7 +63,7 @@ playerImg = pygame.image.load(path.join(img_dir, "p1_walk02.png")).convert()
 playerImg.set_colorkey(BLACK)
 playerImg = pygame.transform.scale(playerImg, (160,190))
 heartImg.set_colorkey(WHITE)
-#music_file = 'music/senorita.mp3'
+#music_file = 'music/senorita2.wav'
 # mixer.music.load(music_file)
 # mixer.music.play(-1)
 # music_file = 'music\Piano Fantasia Song For Denise.mp3'
@@ -180,7 +180,7 @@ def mainMenu():
     active_sprite_list.add(btn2)
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
-    #music_file = 'music/senorita.mp3'
+    #music_file = 'music/senorita2.wav'
     # mixer.music.load(music_file)
     # mixer.music.play(-1)
 
