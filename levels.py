@@ -35,6 +35,7 @@ class Level():
         self.vote_list     = pygame.sprite.Group()
         # self.respawn_list = pygame.sprite.Group()
         self.player = player
+        self.level_change = 0
 
     # Update everythign on this level
     def update(self):
@@ -54,7 +55,8 @@ class Level():
         # to give a feeling of depth.
         screen.fill(constants.BLUE)
         screen.blit(self.background,(self.world_shiftX // 3, self.world_shiftY // 3))
-        screen.blit(constants.map_img, (self.world_shiftX, self.world_shiftY - 400))
+        mipMap = [constants.map_img1, constants.map_img2, constants.map_img3]
+        screen.blit(mipMap[self.level_change], (self.world_shiftX, self.world_shiftY - 400))
 
         # Draw all the sprite lists that we have
         self.platform_list.draw(screen)
@@ -132,7 +134,7 @@ class Level_01(Level):
         self.power   = []
         lava    = []
         finish  = []
-        for tile_object in constants.myMap.tmxdata.objects:
+        for tile_object in constants.myMap1.tmxdata.objects:
             if tile_object.name == 'ground':
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
@@ -184,7 +186,7 @@ class Level_01(Level):
         for votes in self.vote_list:
             votes.kill()
 
-        for tile_object in constants.myMap.tmxdata.objects:
+        for tile_object in constants.myMap1.tmxdata.objects:
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
 
@@ -204,7 +206,7 @@ class Level_02(Level):
         self.power   = []
         lava    = []
         finish  = []
-        for tile_object in constants.myMap.tmxdata.objects:
+        for tile_object in constants.myMap2.tmxdata.objects:
             if tile_object.name == 'ground':
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
@@ -256,7 +258,7 @@ class Level_02(Level):
         for votes in self.vote_list:
             votes.kill()
 
-        for tile_object in constants.myMap.tmxdata.objects:
+        for tile_object in constants.myMap2.tmxdata.objects:
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
 
@@ -277,7 +279,7 @@ class Level_03(Level):
         self.power   = []
         lava    = []
         finish  = []
-        for tile_object in constants.myMap.tmxdata.objects:
+        for tile_object in constants.myMap3.tmxdata.objects:
             if tile_object.name == 'ground':
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
@@ -329,7 +331,7 @@ class Level_03(Level):
         for votes in self.vote_list:
             votes.kill()
 
-        for tile_object in constants.myMap.tmxdata.objects:
+        for tile_object in constants.myMap3.tmxdata.objects:
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
 

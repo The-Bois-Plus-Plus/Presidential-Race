@@ -17,9 +17,15 @@ SCREEN_WIDTH  = 800
 SCREEN_HEIGHT = 600
 
 
-myMap = TileMap('level1.tmx')
-map_img = myMap.make_map()
-map_img.set_colorkey(BLACK)
-map_rect = map_img.get_rect()
+myMap1 = TileMap('level1.tmx')
+myMap2 = TileMap('level2.tmx')
+myMap3 = TileMap('level3.tmx')
+map_img1 = myMap1.make_map()
+map_img2 = myMap2.make_map()
+map_img3 = myMap3.make_map()
+map_img1.set_colorkey(BLACK)
+map_img2.set_colorkey(BLACK)
+map_img3.set_colorkey(BLACK)
+map_rect = map_img1.get_rect()
 
 pygame.quit()

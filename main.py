@@ -309,6 +309,7 @@ def main():
             cameraMovement(level_list[0])
             mailCollide(level_list[0])
             lavaCollision(level_list[0])
+            level_list[0].level_change = 0
             hit = pygame.sprite.spritecollide(player, level_list[0].enemy_sprite, False)
             
             for hits in hit:
@@ -346,7 +347,7 @@ def main():
             cameraMovement(level_list[1])
             mailCollide(level_list[1])
             lavaCollision(level_list[1])
-
+            level_list[1].level_change = 1
             hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
 
             for hits in hit:
@@ -395,6 +396,7 @@ def main():
             cameraMovement(level_list[2])
             mailCollide(level_list[2])
             lavaCollision(level_list[2])
+            level_list[2].level_change = 2
             hit = pygame.sprite.spritecollide(player, level_list[2].enemy_sprite, False)
             
             for hits in hit:
