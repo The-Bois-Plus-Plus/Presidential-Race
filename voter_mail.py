@@ -9,15 +9,17 @@ class PowerUp(pygame.sprite.Sprite):
     level = None
     change_x = 0
     change_y = 0
-    def __init__(self):
+    def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
+       
         sprite_sheet = SpriteSheet("images/voter_mail.png")
-        image = sprite_sheet.get_image(0, 0, 66, 58)
-
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(0, 0, 28, 20)
         self.image = image
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.x = random.randrange(100, 2200)
+        self.rect.x = x
+        self.rect.y = y
         
     def update(self):
         """ Move the player. """
@@ -55,15 +57,3 @@ class PowerUp(pygame.sprite.Sprite):
 
             # if isinstance(block, MovingPlatform):
             #     self.rect.x += block.change_x
-
-    def calc_grav(self):
-        """ Calculate effect of gravity. """
-        if self.change_y == 0:
-            self.change_y = 1
-        else:
-            self.change_y += .35
-
-        # See if we are on the ground.
-        if self.rect.y >= constants.SCREEN_HEIGHT - self.rect.height and self.change_y >= 0:
-            self.change_y = 0
-            self.rect.y = constants.SCREEN_HEIGHT - self.rect.height

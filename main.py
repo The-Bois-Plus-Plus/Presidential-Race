@@ -91,9 +91,9 @@ walls = pygame.sprite.Group()
 
 player = Player()
 level_list = []
+level_list.append(levels.Level_01(player))
 level_list.append(levels.Level_02(player))
-level_list.append(levels.Level_02(player))
-level_list.append(levels.Level_02(player))
+level_list.append(levels.Level_03(player))
 # create the game selection
 levels = []
 for x in range(3):
@@ -167,35 +167,27 @@ def mainMenu():
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
 
-def enemyCollide(current_level, level):
-    hit = pygame.sprite.spritecollide(player, current_level.enemy_sprite, False)
-            
-    for hits in hit:
-        if (player.touchingGround == False):
-            player.jump()
-        else:
-            player.health -= 1
+def lavaCollision(current_level):
+    lava_hits = pygame.sprite.spritecollide(player, current_level.lava_platform, False)
+    for lava in lava_hits:
+        player.life -= 1
+        current_level.shift_worldX(-current_level.world_shiftX)
+        current_level.shift_worldY(40 -current_level.world_shiftY)
+        # if (player.life <= 0 and player.health <= 0):
+        #     mainMenu()
+        #     player.life = 3
+        #     player.health = 100
+
         #this is the hurt sound effect
         pain = mixer.Sound('music/bigOuch.wav')
         pain.play()
-
         #player.jump()
-        if (player.health <= 0): 
-            # player.rect.x = 340
-            # # After the player will then be shifted upwards
-            # player.rect.y = 200
-            current_level.shift_worldX(-current_level.world_shiftX)
-            current_level.shift_worldY(40 -current_level.world_shiftY)
-            # current_level.shift_worldY(0)
-            player.health = 100
-            player.life -= 1
-            if (player.life <= 0):
-                mainMenu()
-                player.life = 3
-                player.health = 100
-                index = 1
-            else:
-                level
+
+
+def mailCollide(current_level):
+    hits = pygame.sprite.spritecollide(player, current_level.vote_list, False)
+    for hit in hits:
+        hit.kill()
 
 # When you clicke the play button this should bring you to all the levels
 # inside the game.
@@ -240,10 +232,8 @@ def level1():
     player.level = level_list[0]
     level_list[0].draw(screen)
     active_sprite_list.add(player)
-
     draw_healthBar(screen, 5, 5, player.health)
     draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
-    
     
 def level2():
     refresh()
@@ -312,17 +302,117 @@ def main():
             level1()
             playerMovement(event)
             cameraMovement(level_list[0])
+            mailCollide(level_list[0])
+            lavaCollision(level_list[0])
+            hit = pygame.sprite.spritecollide(player, level_list[0].enemy_sprite, False)
+            
+            for hits in hit:
+                if (player.touchingGround == False):
+                    player.bounce(22)                
+                else:
+                    player.health -= 1
+                if (player.health <= 0): 
+                    # player.rect.x = 340
+                    # # After the player will then be shifted upwards
+                    # player.rect.y = 200
+                    level_list[0].shift_worldX(-level_list[0].world_shiftX)
+                    level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
+                    # current_level.shift_worldY(0)
+                    player.health = 100
+                    player.life -= 1
+                    if (player.life <= 0):
+                        mainMenu()
+                        level_list[0].restart()
+                        player.life = 3
+                        player.health = 100
+                        index = 1
+                    else:
+                        level1()
+            hit = pygame.sprite.spritecollide(player, level_list[0].new_level, False)
+            for door in hit:
+                index = 8
+                player.health = 100
+                player.life = 3
+                level_list[0].restart()
 
         if index == 8:
             level2()
             playerMovement(event)
             cameraMovement(level_list[1])
+            mailCollide(level_list[1])
+            lavaCollision(level_list[1])
 
-            enemyCollide(level_list[1], level2())
+            hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
+            
+            for hits in hit:
+                # if (player.touchingGround == False):
+                #     player.jump()
+                # else:
+                #     player.health -= 1
+                player.health -= 1
+                if (player.health <= 0): 
+                    # player.rect.x = 340
+                    # # After the player will then be shifted upwards
+                    # player.rect.y = 200
+                    level_list[1].shift_worldX(-level_list[1].world_shiftX)
+                    level_list[1].shift_worldY(40 -level_list[1].world_shiftY)
+                    # current_level.shift_worldY(0)
+                    player.health = 100
+                    player.life -= 1
+                    if (player.life <= 0):
+                        mainMenu()
+                        level_list[1].restart()
+                        player.life = 3
+                        player.health = 100
+                        index = 1
+                    else:
+                        level2()
+            hit = pygame.sprite.spritecollide(player, level_list[1].new_level, False)
+            for door in hit:
+                index = 9
+                player.health = 100
+                player.life = 3
+                level_list[1].restart()
+
         if index == 9:
             level3()
             playerMovement(event)
             cameraMovement(level_list[2])
+            mailCollide(level_list[2])
+            lavaCollision(level_list[2])
+            hit = pygame.sprite.spritecollide(player, level_list[2].enemy_sprite, False)
+            
+            for hits in hit:
+                # if (player.touchingGround == False):
+                #     player.jump()
+                # else:
+                #     player.health -= 1
+                player.health -= 1
+                if (player.health <= 0): 
+                    # player.rect.x = 340
+                    # # After the player will then be shifted upwards
+                    # player.rect.y = 200
+                    level_list[2].shift_worldX(-level_list[2].world_shiftX)
+                    level_list[2].shift_worldY(40 -level_list[2].world_shiftY)
+                    # current_level.shift_worldY(0)
+                    player.health = 100
+                    player.life -= 1
+                    if (player.life <= 0):
+                        level_list[2].restart()
+                        mainMenu()
+                        player.life = 3
+                        player.health = 100
+                        index = 1
+                    else:
+                        level3()
+            hit = pygame.sprite.spritecollide(player, level_list[2].new_level, False)
+            for door in hit:
+                mainMenu()
+                index = 1
+                player.health = 100
+                player.life = 3
+                level_list[2].restart()
+
         if index == 7:
             refresh()
             screen.fill((0,0,0))
