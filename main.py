@@ -40,6 +40,7 @@ from player import Player
 from enemy import Enemy
 from voter_mail import PowerUp
 
+pygame.mixer.init()
 pygame.init()
 # Set the height and width of the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -166,6 +167,35 @@ def mainMenu():
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
 
+def enemyCollide(current_level, level):
+    hit = pygame.sprite.spritecollide(player, current_level.enemy_sprite, False)
+            
+    for hits in hit:
+        if (player.touchingGround == False):
+            player.jump()
+        else:
+            player.health -= 1
+        #this is the hurt sound effect
+        pain = mixer.Sound('music/bigOuch.wav')
+        pain.play()
+
+        #player.jump()
+        if (player.health <= 0): 
+            # player.rect.x = 340
+            # # After the player will then be shifted upwards
+            # player.rect.y = 200
+            current_level.shift_worldX(-current_level.world_shiftX)
+            current_level.shift_worldY(40 -current_level.world_shiftY)
+            # current_level.shift_worldY(0)
+            player.health = 100
+            player.life -= 1
+            if (player.life <= 0):
+                mainMenu()
+                player.life = 3
+                player.health = 100
+                index = 1
+            else:
+                level
 
 # When you clicke the play button this should bring you to all the levels
 # inside the game.
@@ -205,6 +235,7 @@ player.rect.y = SCREEN_HEIGHT - player.rect.height - 400
 
 def level1():
     refresh()
+
     screen.fill(BLUE)
     player.level = level_list[0]
     level_list[0].draw(screen)
@@ -227,6 +258,7 @@ def level2():
  
     draw_healthBar(screen, 5, 5, player.health)
     draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
+    
 
 def level3():
     refresh()
@@ -285,34 +317,8 @@ def main():
             level2()
             playerMovement(event)
             cameraMovement(level_list[1])
-            hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
-            
-            for hits in hit:
-                if (player.touchingGround == False):
-                    player.jump()
-                else:
-                    player.health -= 1
-                #this is the hurt sound effect
-                pain = mixer.Sound('music/bigOuch.wav')
-                pain.play()
 
-                #player.jump()
-                if (player.health <= 0): 
-                    # player.rect.x = 340
-                    # # After the player will then be shifted upwards
-                    # player.rect.y = 200
-                    level_list[1].shift_worldX(-level_list[1].world_shiftX)
-                    level_list[1].shift_worldY(40 -level_list[1].world_shiftY)
-                    # current_level.shift_worldY(0)
-                    player.health = 100
-                    player.life -= 1
-                    if (player.life <= 0):
-                        mainMenu()
-                        player.life = 3
-                        player.health = 100
-                        index = 1
-                    else:
-                        level2()
+            enemyCollide(level_list[1], level2())
         if index == 9:
             level3()
             playerMovement(event)
