@@ -24,20 +24,20 @@ http://opengameart.org/content/platformer-art-deluxe
 
 """
 
-import pygame
 import pathlib
-import levels
-from constants import *
+from os import path
+
+import pygame
 from pygame import mixer
 
+import levels
 from buttons import Button, Panel
-from platforms import *
-from img import *
-from os import path
-from tilemap import TileMap
-
-from player import Player
+from constants import *
 from enemy import Enemy
+from img import *
+from platforms import *
+from player import Player
+from tilemap import TileMap
 from voter_mail import PowerUp
 
 pygame.mixer.init()
@@ -64,6 +64,9 @@ playerImg = pygame.image.load(path.join(img_dir, "p1_walk02.png")).convert()
 playerImg.set_colorkey(BLACK)
 playerImg = pygame.transform.scale(playerImg, (160,190))
 heartImg.set_colorkey(WHITE)
+#music_file = 'music/senorita.mp3'
+# mixer.music.load(music_file)
+# mixer.music.play(-1)
 # music_file = 'music\Piano Fantasia Song For Denise.mp3'
 # pygame.mixer.music.load(music_file)
 # pygame.mixer.music.play(-1) 
@@ -166,6 +169,9 @@ def mainMenu():
     active_sprite_list.add(btn2)
     active_sprite_list.add(btn4)
     active_sprite_list.add(btn8)
+    #music_file = 'music/senorita.mp3'
+    # mixer.music.load(music_file)
+    # mixer.music.play(-1)
 
 def lavaCollision(current_level):
     lava_hits = pygame.sprite.spritecollide(player, current_level.lava_platform, False)
@@ -249,7 +255,10 @@ def level2():
     draw_healthBar(screen, 5, 5, player.health)
     draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> ebc66fce166a93075f48d6465926f74dcd49a912
 def level3():
     refresh()
     screen.fill(BLUE)
@@ -343,13 +352,31 @@ def main():
             lavaCollision(level_list[1])
 
             hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
-            
+
             for hits in hit:
+<<<<<<< HEAD
                 # if (player.touchingGround == False):
                 #     player.jump()
                 # else:
                 #     player.health -= 1
                 player.health -= 1
+=======
+                if (player.touchingGround == False):
+                    player.jump()
+                else:
+                    player.health -= 1
+                #this is the hurt sound effect
+                #if pygame.mixer.get_busy() == False:
+                pain = mixer.Sound('music/bigOuch.wav')
+                pain.play()
+                #if player.change_y < 0 and player.y > current_level.enemy_sprite.y:
+                    #player.jump()
+                #else:
+                    #player.health -= 1
+
+                player.health -= 1
+                #player.jump()
+>>>>>>> ebc66fce166a93075f48d6465926f74dcd49a912
                 if (player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
