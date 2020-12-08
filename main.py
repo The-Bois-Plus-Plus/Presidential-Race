@@ -26,6 +26,7 @@ http://opengameart.org/content/platformer-art-deluxe
 
 import pathlib
 from os import path
+import math
 
 import pygame
 from pygame import mixer
@@ -310,6 +311,11 @@ def main():
             mailCollide(level_list[0])
             lavaCollision(level_list[0])
             level_list[0].level_change = 0
+            # find the distance between the player and the enemy
+            for pos in level_list[0].enemy_sprite:
+                distance = math.sqrt((player.rect.x - pos.rect.x) ** 2 + (player.rect.y - pos.rect.y) ** 2)
+                if (distance < 100):
+                    print("mob distance x: {}".format(distance) )
             hit = pygame.sprite.spritecollide(player, level_list[0].enemy_sprite, False)
             
             for hits in hit:
@@ -334,8 +340,11 @@ def main():
                         index = 1
                     else:
                         level1()
+
             hit = pygame.sprite.spritecollide(player, level_list[0].new_level, False)
             for door in hit:
+                level_list[0].shift_worldX(-level_list[0].world_shiftX)
+                level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
                 index = 8
                 player.health = 100
                 player.life = 3
@@ -351,16 +360,18 @@ def main():
             hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
 
             for hits in hit:
-                if (player.touchingGround == False):
-                    player.jump()
-                else:
-                    player.health -= 1
+                # if (player.touchingGround == False and player.rect.y > hits.rect.y):
+                #     player.bounce(22)
+                # if (player.touchingGround == False):
+                #     player.jump()
+                # else:
+                player.health -= 1
                 #this is the hurt sound effect
                 #if pygame.mixer.get_busy() == False:
                 pain = mixer.Sound('music/bigOuch.wav')
                 pain.play()
-                #if player.change_y < 0 and player.y > current_level.enemy_sprite.y:
-                    #player.jump()
+                # if player.change_y < 0 and player.y > level_list[2].enemy_sprite.y:
+                #     player.jump()
                 #else:
                     #player.health -= 1
 
@@ -385,6 +396,8 @@ def main():
                         level2()
             hit = pygame.sprite.spritecollide(player, level_list[1].new_level, False)
             for door in hit:
+                level_list[0].shift_worldX(-level_list[0].world_shiftX)
+                level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
                 index = 9
                 player.health = 100
                 player.life = 3
@@ -424,6 +437,8 @@ def main():
                         level3()
             hit = pygame.sprite.spritecollide(player, level_list[2].new_level, False)
             for door in hit:
+                level_list[0].shift_worldX(-level_list[0].world_shiftX)
+                level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
                 mainMenu()
                 index = 1
                 player.health = 100
