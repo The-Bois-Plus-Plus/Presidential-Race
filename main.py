@@ -321,8 +321,8 @@ def main():
             for hits in hit:
                 if (player.touchingGround == False):
                     player.bounce(22)                
-                # else:
-                player.health -= 1
+                else:
+                    player.health -= 1
                 if (player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
@@ -360,12 +360,15 @@ def main():
             hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
 
             for hits in hit:
+                if (player.touchingGround == False):
+                    player.bounce(22)                
+                else:
+                    player.health -= 1
                 # if (player.touchingGround == False and player.rect.y > hits.rect.y):
                 #     player.bounce(22)
                 # if (player.touchingGround == False):
                 #     player.jump()
                 # else:
-                player.health -= 1
                 #this is the hurt sound effect
                 #if pygame.mixer.get_busy() == False:
                 pain = mixer.Sound('music/bigOuch.wav')
@@ -413,10 +416,9 @@ def main():
             hit = pygame.sprite.spritecollide(player, level_list[2].enemy_sprite, False)
             for hits in hit:
                 if (player.touchingGround == False):
-                    player.jump()
-                # else:
-                #     player.health -= 1
-                player.health -= 1
+                    player.bounce(22)                
+                else:
+                    player.health -= 1
                 if (player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
