@@ -286,6 +286,7 @@ def main():
     # -------- Main Program Loop -----------
     while not done:
         for event in pygame.event.get():
+            print("index: {}", index)
             if event.type == pygame.QUIT:
                 done = True
             if event.type == pygame.MOUSEMOTION:
