@@ -313,16 +313,15 @@ def main():
             level_list[0].level_change = 0
             # find the distance between the player and the enemy
             for pos in level_list[0].enemy_sprite:
-                distance = math.sqrt((player.rect.x - pos.rect.x) ** 2 + (player.rect.y - pos.rect.y) ** 2)
-                if (distance < 100):
-                    print("mob distance x: {}".format(distance) )
+                # distance = math.sqrt((player.rect.x - pos.rect.x) ** 2 + (player.rect.y - pos.rect.y) ** 2)
+                pygame.draw.circle(screen, RED, (pos.rect.centerx, pos.rect.centery), 40, 1)
+                    
             hit = pygame.sprite.spritecollide(player, level_list[0].enemy_sprite, False)
-            
             for hits in hit:
                 if (player.touchingGround == False):
                     player.bounce(22)                
-                else:
-                    player.health -= 1
+                # else:
+                player.health -= 1
                 if (player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
@@ -411,10 +410,9 @@ def main():
             lavaCollision(level_list[2])
             level_list[2].level_change = 2
             hit = pygame.sprite.spritecollide(player, level_list[2].enemy_sprite, False)
-            
             for hits in hit:
-                # if (player.touchingGround == False):
-                #     player.jump()
+                if (player.touchingGround == False):
+                    player.jump()
                 # else:
                 #     player.health -= 1
                 player.health -= 1

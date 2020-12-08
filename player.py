@@ -37,7 +37,7 @@ class Player(pygame.sprite.Sprite):
 
         # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
-        self.touchingGround = False
+        self.touchingGround = True
 
         sprite_sheet = SpriteSheet("graphicsLib/Player/trump_run.png")
         # Load all the right facing images into a list
@@ -100,6 +100,7 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         # See if we hit anything
         block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
+        # self.touchingGround = True
         for block in block_hit_list:
             # If we are moving right,
             # set our right side to the left side of the item we hit
@@ -111,7 +112,6 @@ class Player(pygame.sprite.Sprite):
 
         # Move up/down
         self.rect.y += self.change_y
-        self.touchingGround = False
 
 
         # Check and see if we hit anything
@@ -126,12 +126,12 @@ class Player(pygame.sprite.Sprite):
 
             # Stop our vertical movement
             self.change_y = 0
-            self.touchingGround = True
             if isinstance(block, MovingPlatform):
                 self.rect.x += block.change_x
-
     def calc_grav(self):
         """ Calculate effect of gravity. """
+        self.touchingGround = False
+
         if self.change_y == 0:
             self.change_y = 1
         else:
@@ -147,6 +147,7 @@ class Player(pygame.sprite.Sprite):
 
     def jump(self):
         """ Called when user hits 'jump' button. """
+        self.touchingGround = False
         # move down a bit and see if there is a platform below us.
         # Move down 2 pixels because it doesn't work well if we only move down 1
         # when working with a platform moving down.
