@@ -16,7 +16,7 @@ class Level():
     # lists as needed for your game. """
     platform_list = None
     enemy_list = None
-
+    
     # Background image
     background = None
 
@@ -34,6 +34,7 @@ class Level():
         self.enemy_mov     = pygame.sprite.Group()
         self.enemy_sprite  = pygame.sprite.Group()
         self.new_level     = pygame.sprite.Group()
+        self.player        = None
         self.vote_list     = pygame.sprite.Group()
         # self.respawn_list = pygame.sprite.Group()
         self.level_change = 0
@@ -142,7 +143,8 @@ class Level_01(Level):
         enemies = []
         movenemy = []
         self.power   = []
-        self.enemy_count = 0
+        self.resetX = 0
+        self.resetY = 0
         lava    = []
         finish  = []
         for tile_object in constants.myMap1.tmxdata.objects:
@@ -160,6 +162,8 @@ class Level_01(Level):
                 finish.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'player':
                 self.player = Player(tile_object.x, tile_object.y - 400)
+                self.resetX = tile_object.x
+                self.resetY = tile_object.y - 400
                 
 
 
@@ -210,6 +214,11 @@ class Level_01(Level):
 
         for votes in self.power:
             self.vote_list.add(votes)
+
+    def resetMov(self):
+        if (self.resetX and self.resetY != None):
+            self.player.rect.x = self.resetX
+            self.player.rect.y = self.resetY
 
 class Level_02(Level):
     def __init__(self):
@@ -283,8 +292,8 @@ class Level_02(Level):
 
 
 class Level_03(Level):
-    def __init__(self, player):
-        Level.__init__(self, player)
+    def __init__(self):
+        Level.__init__(self)
 
         self.background = pygame.image.load("images/background_01.png").convert()
         self.background.set_colorkey(constants.WHITE)

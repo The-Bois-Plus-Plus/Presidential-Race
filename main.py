@@ -133,31 +133,31 @@ def refresh():
         btn.kill()
 
 def cameraMovement(current_level):
-    if player.rect.x >= 240:
-        diff = player.rect.x - 240
-        player.rect.x = 240
+    if current_level.player.rect.x >= 240:
+        diff = current_level.player.rect.x - 240
+        current_level.player.rect.x = 240
         current_level.shift_worldX(-diff)
 
-    if player.rect.y <= 0:
-        diff = player.rect.y
-        player.rect.y = 0
+    if current_level.player.rect.y <= 0:
+        diff = current_level.player.rect.y
+        current_level.player.rect.y = 0
         current_level.shift_worldY(-diff)
             
-    if player.rect.y > 90:
+    if current_level.player.rect.y > 90:
         current_level.shift_worldX(-current_level.world_shiftX)
         current_level.shift_worldY(-current_level.world_shiftY)
-        player.rect.y = 380
+        current_level.player.rect.y = 380
 
-    if player.rect.y >= 50:
-        diff = player.rect.y - 50
-        player.rect.y = 50
+    if current_level.player.rect.y >= 50:
+        diff = current_level.player.rect.y - 50
+        current_level.player.rect.y = 50
         current_level.shift_worldY(-diff)
 
-def playerMovement(event):
-    player.go_right()
+def playerMovement(current_level, event):
+    current_level.player.go_right()
     if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_UP and player.touchingGround:
-            player.jump()
+        if event.key == pygame.K_UP: #and current_level.player.touchingGround:
+            current_level.player.jump()
 
 def mainMenu():
     refresh()
@@ -185,9 +185,10 @@ def draw_text(surf, text, size, x, y):
     surf.blit(text_surface, text_rect)
 
 def lavaCollision(current_level):
-    lava_hits = pygame.sprite.spritecollide(player, current_level.lava_platform, False)
+    lava_hits = pygame.sprite.spritecollide(current_level.player, current_level.lava_platform, False)
     for lava in lava_hits:
-        player.life -= 1
+        current_level.player.life -= 1
+        current_level.resetMov()
         current_level.shift_worldX(-current_level.world_shiftX)
         current_level.shift_worldY(40 -current_level.world_shiftY)
         # if (player.life <= 0 and player.health <= 0):
@@ -202,9 +203,9 @@ def lavaCollision(current_level):
 
 
 def mailCollide(current_level):
-    hits = pygame.sprite.spritecollide(player, current_level.vote_list, False)
+    hits = pygame.sprite.spritecollide(current_level.player, current_level.vote_list, False)
     for hit in hits:
-        player.health += .5
+        # current_level.player.health += .5
         hit.kill()
 
 # When you clicke the play button this should bring you to all the levels
@@ -239,33 +240,33 @@ def gameStore():
 #    enhancements = ['jump', 'run', 'life']
 
 #When the game starts the user will be placed 340 pixels away from the left screen.
-player.rect.x = 140
-# After the player will then be shifted upwards
-player.rect.y = SCREEN_HEIGHT - player.rect.height - 400
+# level_list[0].player.rect.x = 140
+# # After the player will then be shifted upwards
+# player.rect.y = SCREEN_HEIGHT - player.rect.height - 400
 
 def level1():
     refresh()
 
     screen.fill(BLUE)
-    player.level = level_list[0]
+    level_list[0].player.level = level_list[0]
     level_list[0].draw(screen)
-    active_sprite_list.add(player)
-    draw_healthBar(screen, 5, 5, player.health)
-    draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
+    active_sprite_list.add(level_list[0].player)
+    draw_healthBar(screen, 5, 5, level_list[0].player.health)
+    draw_lives(screen, SCREEN_WIDTH - 140, 5, level_list[0].player.life, heartImg)
     
 def level2():
     refresh()
 
     screen.fill(BLUE)
 
-    player.level = level_list[1]
+    level_list[1].player.level = level_list[1]
 
     level_list[1].draw(screen)
     # # This draws the player health bar.
-    active_sprite_list.add(player)
+    active_sprite_list.add(level_list[1].player)
  
-    draw_healthBar(screen, 5, 5, player.health)
-    draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
+    draw_healthBar(screen, 5, 5, level_list[1].player.health)
+    draw_lives(screen, SCREEN_WIDTH - 140, 5, level_list[1].player.life, heartImg)
     
 def level3():
     refresh()
@@ -318,80 +319,82 @@ def main():
                         index = value
         if index == 6:
             level1()
-            playerMovement(event)
+            playerMovement(level_list[0], event)
             cameraMovement(level_list[0])
             mailCollide(level_list[0])
             lavaCollision(level_list[0])
             level_list[0].level_change = 0
             for mov in level_list[0].enemy_mov:
-                if (mov.rect.x > 270):
-                    mov.rect.x -= 1
-                else:
-                    mov.rect.x += 1
+                # pygame.time.wait(1)
+                # write the code in here that moves the enemy
+                pass
+
             # find the distance between the player and the enemy
             for pos in level_list[0].enemy_sprite:
                 # distance = math.sqrt((player.rect.x - pos.rect.x) ** 2 + (player.rect.y - pos.rect.y) ** 2)
                 pygame.draw.circle(screen, RED, (pos.rect.centerx, pos.rect.centery), 40, 1)
             
-            movhit = pygame.sprite.spritecollide(player, level_list[0].enemy_mov, False)
+            movhit = pygame.sprite.spritecollide(level_list[0].player, level_list[0].enemy_mov, False)
             for hits in movhit:
-                if (player.touchingGround == False):
-                    player.bounce(22)                
+                if (level_list[0].player.touchingGround == False):
+                    level_list[0].player.bounce(22)                
                 else:
-                    player.health -= 1
-                if (player.health <= 0): 
+                    level_list[0].player.health -= 1
+                if (level_list[0].player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
                     # player.rect.y = 200
                     level_list[0].shift_worldX(-level_list[0].world_shiftX)
                     level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
+                    level_list[0].resetMov()
                     # current_level.shift_worldY(0)
-                    player.health = 100
-                    player.life -= 1
-                    if (player.life <= 0):
+                    level_list[0].player.health = 100
+                    level_list[0].player.life -= 1
+                    if (level_list[0].player.life <= 0):
                         mainMenu()
-                        player.rect.x = 140
+                        level_list[0].player.rect.x = 140
                         # After the player will then be shifted upwards
-                        player.rect.y = SCREEN_HEIGHT - player.rect.height - 400
-                        level_list[0].restart
-                        player.life = 3
-                        player.health = 100
+                        level_list[0].player.rect.y = SCREEN_HEIGHT - level_list[0].player.rect.height - 400
+                        level_list[0].restart()
+                        level_list[0].player.life = 3
+                        level_list[0].player.health = 100
                         index = 1
                     else:
                         level1()
 
-            hit = pygame.sprite.spritecollide(player, level_list[0].enemy_sprite, False)
+            hit = pygame.sprite.spritecollide(level_list[0].player, level_list[0].enemy_sprite, False)
             for hits in hit:
-                if (player.touchingGround == False):
-                    player.bounce(22)                
+                if (level_list[0].player.touchingGround == False):
+                    level_list[0].player.bounce(22)                
                 else:
-                    player.health -= 1
-                if (player.health <= 0): 
+                    level_list[0].player.health -= 1
+                if (level_list[0].player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
                     # player.rect.y = 200
                     level_list[0].shift_worldX(-level_list[0].world_shiftX)
                     level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
+                    level_list[0].resetMov()
                     # current_level.shift_worldY(0)
-                    player.health = 100
-                    player.life -= 1
-                    if (player.life <= 0):
+                    level_list[0].player.health = 100
+                    level_list[0].player.life -= 1
+                    if (level_list[0].player.life <= 0):
                         mainMenu()
-                        level_list[0].restart
-                        player.life = 3
-                        player.health = 100
+                        level_list[0].restart()
+                        level_list[0].player.life = 3
+                        level_list[0].player.health = 100
                         index = 1
                     else:
                         level1()
 
-            hit = pygame.sprite.spritecollide(player, level_list[0].new_level, False)
+            hit = pygame.sprite.spritecollide(level_list[0].player, level_list[0].new_level, False)
             for door in hit:
                 time.sleep(4)
                 level_list[0].shift_worldX(-level_list[0].world_shiftX)
                 level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
                 index = 8
-                player.health = 100
-                player.life = 3
+                level_list[0].player.health = 100
+                level_list[0].player.life = 3
                 level_list[0].restart()
 
         if index == 8:
