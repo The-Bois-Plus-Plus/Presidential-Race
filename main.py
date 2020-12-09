@@ -264,7 +264,6 @@ def level2():
     level_list[1].draw(screen)
     # # This draws the player health bar.
     active_sprite_list.add(level_list[1].player)
- 
     draw_healthBar(screen, 5, 5, level_list[1].player.health)
     draw_lives(screen, SCREEN_WIDTH - 140, 5, level_list[1].player.life, heartImg)
     
@@ -272,13 +271,12 @@ def level3():
     refresh()
     screen.fill(BLUE)
 
-    player.level = level_list[2]
+    level_list[2].player.level = level_list[2]
 
     level_list[2].draw(screen)
-    active_sprite_list.add(player)
- 
-    draw_healthBar(screen, 5, 5, player.health)
-    draw_lives(screen, SCREEN_WIDTH - 140, 5, player.life, heartImg)
+    active_sprite_list.add(level_list[2].player)
+    draw_healthBar(screen, 5, 5, level_list[2].player.health)
+    draw_lives(screen, SCREEN_WIDTH - 140, 5, level_list[2].player.life, heartImg)
 
 def main():
     """ Main Program """
@@ -399,18 +397,18 @@ def main():
 
         if index == 8:
             level2()
-            playerMovement(event)
+            playerMovement(level_list[1], event)
             cameraMovement(level_list[1])
             mailCollide(level_list[1])
             lavaCollision(level_list[1])
             level_list[1].level_change = 1
-            hit = pygame.sprite.spritecollide(player, level_list[1].enemy_sprite, False)
+            hit = pygame.sprite.spritecollide(level_list[1].player, level_list[1].enemy_sprite, False)
 
             for hits in hit:
-                if (player.touchingGround == False):
-                    player.bounce(22)                
+                if (level_list[1].player.touchingGround == False):
+                    level_list[1].player.bounce(22)                
                 else:
-                    player.health -= 1
+                    level_list[1].player.health -= 1
                 # if (player.touchingGround == False and player.rect.y > hits.rect.y):
                 #     player.bounce(22)
                 # if (player.touchingGround == False):
@@ -425,72 +423,72 @@ def main():
                 #else:
                     #player.health -= 1
 
-                player.health -= 1
+                level_list[1].player.health -= 1
                 #player.jump()
-                if (player.health <= 0): 
+                if (level_list[1].player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
                     # player.rect.y = 200
                     level_list[1].shift_worldX(-level_list[1].world_shiftX)
                     level_list[1].shift_worldY(40 -level_list[1].world_shiftY)
                     # current_level.shift_worldY(0)
-                    player.health = 100
-                    player.life -= 1
-                    if (player.life <= 0):
+                    level_list[1].player.health = 100
+                    level_list[1].player.life -= 1
+                    if (level_list[1].player.life <= 0):
                         mainMenu()
                         level_list[1].restart()
-                        player.life = 3
-                        player.health = 100
+                        level_list[1].player.life = 3
+                        level_list[1].player.health = 100
                         index = 1
                     else:
                         level2()
-            hit = pygame.sprite.spritecollide(player, level_list[1].new_level, False)
+            hit = pygame.sprite.spritecollide(level_list[1].player, level_list[1].new_level, False)
             for door in hit:
                 level_list[1].shift_worldX(-level_list[1].world_shiftX)
                 level_list[1].shift_worldY(40 -level_list[1].world_shiftY)
                 index = 9
-                player.health = 100
-                player.life = 3
+                level_list[1].player.health = 100
+                level_list[1].player.life = 3
                 level_list[1].restart()
 
         if index == 9:
             level3()
-            playerMovement(event)
+            playerMovement(level_list[2],event)
             cameraMovement(level_list[2])
             mailCollide(level_list[2])
             lavaCollision(level_list[2])
             level_list[2].level_change = 2
-            hit = pygame.sprite.spritecollide(player, level_list[2].enemy_sprite, False)
+            hit = pygame.sprite.spritecollide(level_list[2].player, level_list[2].enemy_sprite, False)
             for hits in hit:
-                if (player.touchingGround == False):
-                    player.bounce(22)                
+                if (level_list[2].player.touchingGround == False):
+                    level_list[2].player.bounce(22)                
                 else:
-                    player.health -= 1
-                if (player.health <= 0): 
+                    level_list[2].player.health -= 1
+                if (level_list[2].player.health <= 0): 
                     # player.rect.x = 340
                     # # After the player will then be shifted upwards
                     # player.rect.y = 200
                     level_list[2].shift_worldX(-level_list[2].world_shiftX)
                     level_list[2].shift_worldY(40 -level_list[2].world_shiftY)
                     # current_level.shift_worldY(0)
-                    player.health = 100
-                    player.life -= 1
-                    if (player.life <= 0):
+                    level_list[2].player.health = 100
+                    level_list[2].player.life -= 1
+                    if (level_list[2].player.life <= 0):
                         level_list[2].restart()
                         mainMenu()
-                        player.life = 3
-                        player.health = 100
+                        level_list[2].player.life = 3
+                        level_list[2].player.health = 100
                         index = 1
                     else:
                         level3()
-            hit = pygame.sprite.spritecollide(player, level_list[2].new_level, False)
+            hit = pygame.sprite.spritecollide(level_list[2].player, level_list[2].new_level, False)
             for door in hit:
                 level_list[2].shift_worldX(-level_list[2].world_shiftX)
                 level_list[2].shift_worldY(40 -level_list[2].world_shiftY)
                 mainMenu()
                 index = 1
-                player.health = 100
-                player.life = 3
+                level_list[2].player.health = 100
+                level_list[2].player.life = 3
                 level_list[2].restart()
 
         if index == 7:

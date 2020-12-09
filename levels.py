@@ -222,6 +222,7 @@ class Level_01(Level):
 
 class Level_02(Level):
     def __init__(self):
+        # Call the parent constructor
         Level.__init__(self)
 
         self.background = pygame.image.load("images/background_01.png").convert()
@@ -230,7 +231,10 @@ class Level_02(Level):
         
         ground  = []
         enemies = []
+        movenemy = []
         self.power   = []
+        self.resetX = 0
+        self.resetY = 0
         lava    = []
         finish  = []
         for tile_object in constants.myMap2.tmxdata.objects:
@@ -238,18 +242,27 @@ class Level_02(Level):
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
                 enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
+            if tile_object.name == 'move':
+                movenemy.append([Enemy(tile_object.x, tile_object.y - 400)])
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
             if tile_object.name == 'lava':
                 lava.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'finish':
                 finish.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
+            if tile_object.name == 'player':
+                self.player = Player(tile_object.x, tile_object.y - 400)
+                self.resetX = tile_object.x
+                self.resetY = tile_object.y - 400
                 
 
 
         for active in enemies:
             self.enemy_sprite.add(active)
-        
+
+        for mov in movenemy:
+            self.enemy_mov.add(mov)
+
         for votes in self.power:
             self.vote_list.add(votes)
 
@@ -260,6 +273,7 @@ class Level_02(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
+            # block.player = self.player
             self.platform_list.add(block)
 
         # we want to add the lava
@@ -268,7 +282,7 @@ class Level_02(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
+            # block.player = self.player
             self.lava_platform.add(block)
         
         for platform in finish:
@@ -276,6 +290,7 @@ class Level_02(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
+            # block.player = self.player
             self.new_level.add(block)
 
     def restart(self):
@@ -290,9 +305,14 @@ class Level_02(Level):
         for votes in self.power:
             self.vote_list.add(votes)
 
+    def resetMov(self):
+        if (self.resetX and self.resetY != None):
+            self.player.rect.x = self.resetX
+            self.player.rect.y = self.resetY
 
 class Level_03(Level):
     def __init__(self):
+        # Call the parent constructor
         Level.__init__(self)
 
         self.background = pygame.image.load("images/background_01.png").convert()
@@ -301,7 +321,10 @@ class Level_03(Level):
         
         ground  = []
         enemies = []
+        movenemy = []
         self.power   = []
+        self.resetX = 0
+        self.resetY = 0
         lava    = []
         finish  = []
         for tile_object in constants.myMap3.tmxdata.objects:
@@ -309,18 +332,27 @@ class Level_03(Level):
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
                 enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
+            if tile_object.name == 'move':
+                movenemy.append([Enemy(tile_object.x, tile_object.y - 400)])
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
             if tile_object.name == 'lava':
                 lava.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'finish':
                 finish.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
+            if tile_object.name == 'player':
+                self.player = Player(tile_object.x, tile_object.y - 400)
+                self.resetX = tile_object.x
+                self.resetY = tile_object.y - 400
                 
 
 
         for active in enemies:
             self.enemy_sprite.add(active)
-        
+
+        for mov in movenemy:
+            self.enemy_mov.add(mov)
+
         for votes in self.power:
             self.vote_list.add(votes)
 
@@ -362,5 +394,10 @@ class Level_03(Level):
 
         for votes in self.power:
             self.vote_list.add(votes)
+
+    def resetMov(self):
+        if (self.resetX and self.resetY != None):
+            self.player.rect.x = self.resetX
+            self.player.rect.y = self.resetY
 
 
