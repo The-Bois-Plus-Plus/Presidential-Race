@@ -443,8 +443,8 @@ def main():
                         level2()
             hit = pygame.sprite.spritecollide(player, level_list[1].new_level, False)
             for door in hit:
-                level_list[0].shift_worldX(-level_list[0].world_shiftX)
-                level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
+                level_list[1].shift_worldX(-level_list[1].world_shiftX)
+                level_list[1].shift_worldY(40 -level_list[1].world_shiftY)
                 index = 9
                 player.health = 100
                 player.life = 3
@@ -482,8 +482,8 @@ def main():
                         level3()
             hit = pygame.sprite.spritecollide(player, level_list[2].new_level, False)
             for door in hit:
-                level_list[0].shift_worldX(-level_list[0].world_shiftX)
-                level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
+                level_list[2].shift_worldX(-level_list[2].world_shiftX)
+                level_list[2].shift_worldY(40 -level_list[2].world_shiftY)
                 mainMenu()
                 index = 1
                 player.health = 100
