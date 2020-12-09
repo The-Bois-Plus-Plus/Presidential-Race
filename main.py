@@ -37,7 +37,6 @@ import levels
 from buttons import Button, Panel
 from constants import *
 from enemy import Enemy
-from img import *
 from platforms import *
 from player import Player
 from tilemap import TileMap
