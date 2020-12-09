@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
     level = None
 
     # -- Methods
-    def __init__(self):
+    def __init__(self, x, y):
         """ Constructor function """
 
         # Call the parent's constructor
@@ -78,6 +78,8 @@ class Player(pygame.sprite.Sprite):
         self.image = self.walking_frames_r[0]
         # Set a referance to the image rect.
         self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
         self.touchingGround = True
         self.health = 100
         self.life = 3

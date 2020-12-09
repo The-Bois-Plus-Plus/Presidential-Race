@@ -3,6 +3,7 @@ import pygame
 import constants
 import platforms
 import random
+from player import Player
 from enemy import Enemy
 from voter_mail import PowerUp
 
@@ -24,7 +25,7 @@ class Level():
     world_shiftX = 0
     
     level_limit = -1000
-    def __init__(self, player):
+    def __init__(self):
         """ Constructor. Pass in a handle to player. Needed for when moving platforms
             collide with the player. """
         self.platform_list = pygame.sprite.Group()
@@ -35,7 +36,6 @@ class Level():
         self.new_level     = pygame.sprite.Group()
         self.vote_list     = pygame.sprite.Group()
         # self.respawn_list = pygame.sprite.Group()
-        self.player = player
         self.level_change = 0
 
     # Update everythign on this level
@@ -128,11 +128,11 @@ class Level():
 class Level_01(Level):
     """ Definition for level 1. """
 
-    def __init__(self, player):
+    def __init__(self):
         """ Create level 1. """
 
         # Call the parent constructor
-        Level.__init__(self, player)
+        Level.__init__(self)
 
         self.background = pygame.image.load("images/background_01.png").convert()
         self.background.set_colorkey(constants.WHITE)
@@ -158,6 +158,8 @@ class Level_01(Level):
                 lava.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'finish':
                 finish.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
+            if tile_object.name == 'player':
+                self.player = Player(tile_object.x, tile_object.y - 400)
                 
 
 
@@ -177,7 +179,7 @@ class Level_01(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
+            # block.player = self.player
             self.platform_list.add(block)
 
         # we want to add the lava
@@ -186,7 +188,7 @@ class Level_01(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
+            # block.player = self.player
             self.lava_platform.add(block)
         
         for platform in finish:
@@ -194,7 +196,7 @@ class Level_01(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
+            # block.player = self.player
             self.new_level.add(block)
 
     def restart(self):
@@ -210,8 +212,8 @@ class Level_01(Level):
             self.vote_list.add(votes)
 
 class Level_02(Level):
-    def __init__(self, player):
-        Level.__init__(self, player)
+    def __init__(self):
+        Level.__init__(self)
 
         self.background = pygame.image.load("images/background_01.png").convert()
         self.background.set_colorkey(constants.WHITE)
@@ -249,7 +251,6 @@ class Level_02(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
             self.platform_list.add(block)
 
         # we want to add the lava
@@ -266,7 +267,6 @@ class Level_02(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
             self.new_level.add(block)
 
     def restart(self):
@@ -322,7 +322,7 @@ class Level_03(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
+            # block.player = self.player
             self.platform_list.add(block)
 
         # we want to add the lava
@@ -331,7 +331,7 @@ class Level_03(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
+            # block.player = self.player
             self.lava_platform.add(block)
         
         for platform in finish:
@@ -339,7 +339,7 @@ class Level_03(Level):
             block.rect.x = platform[1]
             block.rect.y = platform[2]
             block.rect.w = platform[3]
-            block.player = self.player
+            # block.player = self.player
             self.new_level.add(block)
 
     def restart(self):

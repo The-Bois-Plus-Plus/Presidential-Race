@@ -95,11 +95,11 @@ buttons = pygame.sprite.Group()
 panels = pygame.sprite.Group()
 walls = pygame.sprite.Group()
 
-player = Player()
+# player = Player()
 level_list = []
-level_list.append(levels.Level_01(player))
-level_list.append(levels.Level_02(player))
-level_list.append(levels.Level_03(player))
+level_list.append(levels.Level_01())
+level_list.append(levels.Level_02())
+level_list.append(levels.Level_03())
 # create the game selection
 levels = []
 for x in range(3):
