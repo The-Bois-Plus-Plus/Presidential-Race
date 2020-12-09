@@ -429,6 +429,7 @@ def main():
                     # player.rect.y = 200
                     level_list[1].shift_worldX(-level_list[1].world_shiftX)
                     level_list[1].shift_worldY(40 -level_list[1].world_shiftY)
+                    level_list[0].resetMov()
                     # current_level.shift_worldY(0)
                     level_list[1].player.health = 100
                     level_list[1].player.life -= 1
@@ -436,7 +437,7 @@ def main():
                         mainMenu()
                         level_list[1].restart()
                         level_list[1].player.life = 3
-                        level_list[1].player.health = 100
+                        level_list[1].player.health = 10
                         index = 1
                     else:
                         level2()
@@ -468,6 +469,7 @@ def main():
                     # player.rect.y = 200
                     level_list[2].shift_worldX(-level_list[2].world_shiftX)
                     level_list[2].shift_worldY(40 -level_list[2].world_shiftY)
+                    level_list[0].resetMov()
                     # current_level.shift_worldY(0)
                     level_list[2].player.health = 100
                     level_list[2].player.life -= 1
@@ -488,6 +490,7 @@ def main():
                 level_list[2].player.health = 100
                 level_list[2].player.life = 3
                 level_list[2].restart()
+                level_list[2].resetMov()
 
         if index == 7:
             refresh()
