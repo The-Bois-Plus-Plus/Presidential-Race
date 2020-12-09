@@ -223,7 +223,7 @@ class Level_01(Level):
 class Level_02(Level):
     def __init__(self):
         # Call the parent constructor
-        Level.__init__(self)
+             Level.__init__(self)
 
         self.background = pygame.image.load("images/background_01.png").convert()
         self.background.set_colorkey(constants.WHITE)
@@ -237,7 +237,7 @@ class Level_02(Level):
         self.resetY = 0
         lava    = []
         finish  = []
-        for tile_object in constants.myMap2.tmxdata.objects:
+        for tile_object in constants.myMap1.tmxdata.objects:
             if tile_object.name == 'ground':
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
@@ -298,7 +298,7 @@ class Level_02(Level):
         for votes in self.vote_list:
             votes.kill()
 
-        for tile_object in constants.myMap2.tmxdata.objects:
+        for tile_object in constants.myMap1.tmxdata.objects:
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
 
