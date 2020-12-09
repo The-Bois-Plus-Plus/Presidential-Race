@@ -384,7 +384,7 @@ def main():
 
             hit = pygame.sprite.spritecollide(player, level_list[0].new_level, False)
             for door in hit:
-                time.sleep(4)
+                time.sleep(1)
                 level_list[0].shift_worldX(-level_list[0].world_shiftX)
                 level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
                 index = 8
