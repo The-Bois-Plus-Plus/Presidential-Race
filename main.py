@@ -98,7 +98,7 @@ walls = pygame.sprite.Group()
 level_list = []
 level_list.append(levels.Level_01())
 level_list.append(levels.Level_02())
-level_list.append(levels.Level_03())
+level_list.append(levels.Level_01())
 # create the game selection
 levels = []
 for x in range(3):
@@ -332,8 +332,8 @@ def main():
             
             movhit = pygame.sprite.spritecollide(level_list[0].player, level_list[0].enemy_mov, False)
             for hits in movhit:
-                if (player.touchingGround == False):
-                    player.bounce(22)                
+                if (level_list[0].player.touchingGround == False):
+                    level_list[0].player.bounce(22)                
                 else:
                     level_list[0].player.health -= 1
                 if (level_list[0].player.health <= 0): 
