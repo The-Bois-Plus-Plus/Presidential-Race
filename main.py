@@ -332,13 +332,8 @@ def main():
             
             movhit = pygame.sprite.spritecollide(level_list[0].player, level_list[0].enemy_mov, False)
             for hits in movhit:
-<<<<<<< HEAD
-                if (level_list[0].player.touchingGround == False):
-                    level_list[0].player.bounce(22)                
-=======
-                if (player.touchingGround == False and event.key == pygame.K_UP):
+                if (player.touchingGround == False):
                     player.bounce(22)                
->>>>>>> 4317f2efe0f1df90ef6907464d65fcb7b46dc401
                 else:
                     level_list[0].player.health -= 1
                 if (level_list[0].player.health <= 0): 
