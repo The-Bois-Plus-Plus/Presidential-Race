@@ -37,7 +37,6 @@ import levels
 from buttons import Button, Panel
 from constants import *
 from enemy import Enemy
-from img import *
 from platforms import *
 from player import Player
 from tilemap import TileMap
@@ -333,8 +332,13 @@ def main():
             
             movhit = pygame.sprite.spritecollide(level_list[0].player, level_list[0].enemy_mov, False)
             for hits in movhit:
+<<<<<<< HEAD
                 if (level_list[0].player.touchingGround == False):
                     level_list[0].player.bounce(22)                
+=======
+                if (player.touchingGround == False and event.key == pygame.K_UP):
+                    player.bounce(22)                
+>>>>>>> 4317f2efe0f1df90ef6907464d65fcb7b46dc401
                 else:
                     level_list[0].player.health -= 1
                 if (level_list[0].player.health <= 0): 
@@ -386,7 +390,7 @@ def main():
 
             hit = pygame.sprite.spritecollide(level_list[0].player, level_list[0].new_level, False)
             for door in hit:
-                time.sleep(4)
+                time.sleep(1)
                 level_list[0].shift_worldX(-level_list[0].world_shiftX)
                 level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
                 index = 8
