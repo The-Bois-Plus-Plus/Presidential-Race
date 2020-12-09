@@ -30,6 +30,7 @@ class Level():
         self.platform_list = pygame.sprite.Group()
         self.lava_platform = pygame.sprite.Group()
         self.enemy_list    = pygame.sprite.Group()
+        self.enemy_mov     = pygame.sprite.Group()
         self.enemy_sprite  = pygame.sprite.Group()
         self.new_level     = pygame.sprite.Group()
         self.vote_list     = pygame.sprite.Group()
@@ -43,6 +44,7 @@ class Level():
         self.platform_list.update()
         self.lava_platform.update()
         self.enemy_list.update()
+        self.enemy_mov.update()
         self.new_level.update()
         self.enemy_sprite.update()
         self.vote_list.update()
@@ -61,6 +63,7 @@ class Level():
         # Draw all the sprite lists that we have
         self.platform_list.draw(screen)
         self.enemy_list.draw(screen)
+        self.enemy_mov.draw(screen)
         self.enemy_sprite.draw(screen)
         self.vote_list.draw(screen)
         self.new_level.draw(screen)
@@ -76,6 +79,9 @@ class Level():
         
         for enemies in self.enemy_sprite:
             enemies.rect.y += shift_y
+        
+        for mov in self.enemy_mov:
+            mov.rect.y += shift_y
         
         for platform in self.lava_platform:
             platform.rect.y += shift_y
@@ -106,6 +112,9 @@ class Level():
         for enemies in self.enemy_sprite:
             enemies.rect.x += shift_x
         
+        for mov in self.enemy_mov:
+            mov.rect.x += shift_x
+        
         for mail in self.vote_list:
             mail.rect.x += shift_x
         
@@ -131,7 +140,9 @@ class Level_01(Level):
         
         ground  = []
         enemies = []
+        movenemy = []
         self.power   = []
+        self.enemy_count = 0
         lava    = []
         finish  = []
         for tile_object in constants.myMap1.tmxdata.objects:
@@ -139,6 +150,8 @@ class Level_01(Level):
                 ground.append([platforms.EMPTY_PLATFORM, tile_object.x, tile_object.y - 400, tile_object.width])
             if tile_object.name == 'enemy':
                 enemies.append([Enemy(tile_object.x, tile_object.y - 400)])
+            if tile_object.name == 'move':
+                movenemy.append([Enemy(tile_object.x, tile_object.y - 400)])
             if tile_object.name == 'mail':
                 self.power.append([PowerUp(tile_object.x, tile_object.y - 400)])
             if tile_object.name == 'lava':
@@ -150,7 +163,10 @@ class Level_01(Level):
 
         for active in enemies:
             self.enemy_sprite.add(active)
-        
+
+        for mov in movenemy:
+            self.enemy_mov.add(mov)
+
         for votes in self.power:
             self.vote_list.add(votes)
 

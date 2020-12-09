@@ -27,6 +27,8 @@ http://opengameart.org/content/platformer-art-deluxe
 import pathlib
 from os import path
 import math
+import random
+import time
 
 import pygame
 from pygame import mixer
@@ -174,6 +176,14 @@ def mainMenu():
     # mixer.music.load(music_file)
     # mixer.music.play(-1)
 
+def draw_text(surf, text, size, x, y):
+    font_name = pygame.font.match_font('arial')
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, WHITE)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surf.blit(text_surface, text_rect)
+
 def lavaCollision(current_level):
     lava_hits = pygame.sprite.spritecollide(player, current_level.lava_platform, False)
     for lava in lava_hits:
@@ -194,6 +204,7 @@ def lavaCollision(current_level):
 def mailCollide(current_level):
     hits = pygame.sprite.spritecollide(player, current_level.vote_list, False)
     for hit in hits:
+        player.health += .5
         hit.kill()
 
 # When you clicke the play button this should bring you to all the levels
@@ -312,11 +323,43 @@ def main():
             mailCollide(level_list[0])
             lavaCollision(level_list[0])
             level_list[0].level_change = 0
+            for mov in level_list[0].enemy_mov:
+                if (mov.rect.x > 270):
+                    mov.rect.x -= 1
+                else:
+                    mov.rect.x += 1
             # find the distance between the player and the enemy
             for pos in level_list[0].enemy_sprite:
                 # distance = math.sqrt((player.rect.x - pos.rect.x) ** 2 + (player.rect.y - pos.rect.y) ** 2)
                 pygame.draw.circle(screen, RED, (pos.rect.centerx, pos.rect.centery), 40, 1)
-                    
+            
+            movhit = pygame.sprite.spritecollide(player, level_list[0].enemy_mov, False)
+            for hits in movhit:
+                if (player.touchingGround == False):
+                    player.bounce(22)                
+                else:
+                    player.health -= 1
+                if (player.health <= 0): 
+                    # player.rect.x = 340
+                    # # After the player will then be shifted upwards
+                    # player.rect.y = 200
+                    level_list[0].shift_worldX(-level_list[0].world_shiftX)
+                    level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
+                    # current_level.shift_worldY(0)
+                    player.health = 100
+                    player.life -= 1
+                    if (player.life <= 0):
+                        mainMenu()
+                        player.rect.x = 140
+                        # After the player will then be shifted upwards
+                        player.rect.y = SCREEN_HEIGHT - player.rect.height - 400
+                        level_list[0].restart
+                        player.life = 3
+                        player.health = 100
+                        index = 1
+                    else:
+                        level1()
+
             hit = pygame.sprite.spritecollide(player, level_list[0].enemy_sprite, False)
             for hits in hit:
                 if (player.touchingGround == False):
@@ -334,7 +377,7 @@ def main():
                     player.life -= 1
                     if (player.life <= 0):
                         mainMenu()
-                        level_list[0].restart()
+                        level_list[0].restart
                         player.life = 3
                         player.health = 100
                         index = 1
@@ -343,6 +386,7 @@ def main():
 
             hit = pygame.sprite.spritecollide(player, level_list[0].new_level, False)
             for door in hit:
+                time.sleep(4)
                 level_list[0].shift_worldX(-level_list[0].world_shiftX)
                 level_list[0].shift_worldY(40 -level_list[0].world_shiftY)
                 index = 8
