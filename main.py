@@ -52,6 +52,7 @@ pygame.display.set_caption("Team Project")
 img_dir = path.join(path.dirname(__file__), 'img')
 playButton = pygame.image.load(path.join(img_dir, "btn1.png")).convert()
 gameMenu   = pygame.image.load("images/presidentrunMenu.png")
+gameOver   = pygame.image.load("images/game_over.png")
 helpnav1   = pygame.image.load("images/help.png")
 backButton = pygame.image.load(path.join(img_dir,"btn2.png")).convert()
 backArrow = pygame.image.load(path.join(img_dir, "arrow.png")).convert()
@@ -218,8 +219,8 @@ def levelSelection():
     btn3.rect.y = 400
     active_sprite_list.add(btn3)
     
-# def gameOver():
-#     refresh()
+#def gameOver():
+#    refresh()
     
 # def gameSettings():
 #     refresh()
@@ -344,14 +345,13 @@ def main():
                     level_list[0].player.health = 100
                     level_list[0].player.life -= 1
                     if (level_list[0].player.life <= 0):
-                        mainMenu()
                         level_list[0].player.rect.x = 140
                         # After the player will then be shifted upwards
                         level_list[0].player.rect.y = SCREEN_HEIGHT - level_list[0].player.rect.height - 400
                         level_list[0].restart()
                         level_list[0].player.life = 3
                         level_list[0].player.health = 100
-                        index = 1
+                        index = 3
                     else:
                         level1()
 
@@ -372,11 +372,10 @@ def main():
                     level_list[0].player.health = 100
                     level_list[0].player.life -= 1
                     if (level_list[0].player.life <= 0):
-                        mainMenu()
                         level_list[0].restart()
                         level_list[0].player.life = 3
                         level_list[0].player.health = 100
-                        index = 1
+                        index = 3
                     else:
                         level1()
 
@@ -431,11 +430,11 @@ def main():
                     level_list[1].player.health = 100
                     level_list[1].player.life -= 1
                     if (level_list[1].player.life <= 0):
-                        mainMenu()
+                        
                         level_list[1].restart()
                         level_list[1].player.life = 3
                         level_list[1].player.health = 10
-                        index = 1
+                        index = 3
                     else:
                         level2()
             hit = pygame.sprite.spritecollide(level_list[1].player, level_list[1].new_level, False)
@@ -472,10 +471,10 @@ def main():
                     level_list[2].player.life -= 1
                     if (level_list[2].player.life <= 0):
                         level_list[2].restart()
-                        mainMenu()
+                        
                         level_list[2].player.life = 3
                         level_list[2].player.health = 100
-                        index = 1
+                        index = 3
                     else:
                         level3()
             hit = pygame.sprite.spritecollide(level_list[2].player, level_list[2].new_level, False)
@@ -494,12 +493,16 @@ def main():
             screen.fill((0,0,0))
             levelSelection()
         if index == 3:
-            # brodcast the settings
+            # game over screen
             for oldmembers in active_sprite_list:
                 oldmembers.kill()
-            screen.fill((255, 0, 0))
+            screen.blit(gameOver, (0,0))
             buttons.add(btn3)
             active_sprite_list.add(btn3)
+            btn3.rect.x = 725
+            btn5.rect.x = 570
+            btn3.rect.y = 430
+            btn5.rect.y = 20
         #game help
         if index == 4:
             # fun features within the game
