@@ -80,13 +80,13 @@ storeImages = [vendetta, speedBoost, health]
 
 # We add all the sprites in a group the reason for this is so that we can check for
 # collision between different groups of sprites.
-btn1 = Button(playButton, 200, 90, 0,13, "PLAY", "vertical") #btn1 = Button(playButton, 220, 105, 0,10, "Play", "vertical")
+btn1 = Button(playButton, 200, 90, 0,13, "Play", "vertical") #btn1 = Button(playButton, 220, 105, 0,10, "Play", "vertical")
 btn5 = Button(playButton, 200, 50, 0,11, "Next", "vertical")
-btn4 = Button(playButton, 200, 75, 0,39, "HOW TO PLAY", "vertical") #btn4 = Button(playButton, 220, 105, 0,50, "Help", "vertical")
+btn4 = Button(playButton, 200, 75, 0,39, "Help", "vertical") #btn4 = Button(playButton, 220, 105, 0,50, "Help", "vertical")
 btn3 = Button(backArrow, 60, 90, 0,10, "Back/Arrow")
 btn7 = Button(backButton, 220, 120, 0, 30, "Back")
 btn6 = Button(playButton, 220, 105, 500,20, "Save")
-btn8 = Button(storeLink, 125, 50,SCREEN_WIDTH/2-57, SCREEN_HEIGHT - 220, "STORE")
+btn8 = Button(storeLink, 125, 50,SCREEN_WIDTH/2-57, SCREEN_HEIGHT - 220, "Store")
 
 active_sprite_list = pygame.sprite.Group()
 buttons = pygame.sprite.Group()
