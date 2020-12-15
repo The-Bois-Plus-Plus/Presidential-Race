@@ -430,7 +430,6 @@ def main():
                     level_list[1].player.health = 100
                     level_list[1].player.life -= 1
                     if (level_list[1].player.life <= 0):
-                        
                         level_list[1].restart()
                         level_list[1].player.life = 3
                         level_list[1].player.health = 10
@@ -469,14 +468,14 @@ def main():
                     # current_level.shift_worldY(0)
                     level_list[2].player.health = 100
                     level_list[2].player.life -= 1
-                    if (level_list[2].player.life <= 0):
-                        level_list[2].restart()
-                        
-                        level_list[2].player.life = 3
-                        level_list[2].player.health = 100
-                        index = 3
-                    else:
-                        level3()
+                if (level_list[2].player.life <= 0):
+                    level_list[2].restart()
+                    level_list[2].player.life = 3
+                    level_list[2].player.health = 100
+                    index = 3
+
+                else:
+                    level3()
             hit = pygame.sprite.spritecollide(level_list[2].player, level_list[2].new_level, False)
             for door in hit:
                 level_list[2].shift_worldX(-level_list[2].world_shiftX)
